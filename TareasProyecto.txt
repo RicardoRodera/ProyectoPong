@@ -1,0 +1,14 @@
+\\Aprender interfaz grafica\\
+Fisicas
+Menu/s 
+	Inicio
+	Pausa
+Control de la pala/s
+Movimiento de la pelota
+	Rebotes
+		Pared
+		Pala
+		Efecto de pala sobre pelota
+Efectos sonoros
+Puntuacion
+Game over
