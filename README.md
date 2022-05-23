@@ -21,7 +21,6 @@
     <li>Pared</li>
     <li>Pala</li>  
     </ul>
-    <li>Efecto de pala sobre pelota</li>
   </ul>
   <li>Efectos sonoros</li>
 <li>Base de datos</li>
