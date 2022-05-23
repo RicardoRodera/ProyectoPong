@@ -5,15 +5,12 @@
   <ul>
     <li>Inicio</li>
     <li>Pausa</li>
-	  <ul>
-	<li>Escena de juego facil</li>
-	  <li>Escena de juego medio</li>
-	  <li>Escena de juego dificil</li>
-	  </ul>
-  	<li>Puntuacion</li>
-	  <ul>
-	  <li>Escena fin de partida</li>
-		  <li>x opciones</li></ul>
+    <li>Escena de juego facil</li>
+    <li>Escena de juego medio</li>
+    <li>Escena de juego dificil</li>
+    <li>Puntuacion</li>
+    <li>Escena fin de partida</li>
+    <li>x opciones</li>
   </ul>
   <li>Control de la pala</li>
   <li>Control de la pala automatico</li>
