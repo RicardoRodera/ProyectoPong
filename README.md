@@ -25,10 +25,12 @@
     <li>Efecto de pala sobre pelota</li>
   </ul>
   <li>Efectos sonoros</li>
-
-	<ul>Base de datos</ul>
+<li>Base de datos</li>
+	<ul>
+		
 	<li>Actuallizar al final de la partida</li>
 	<li>Mostrar puntuaciones anteriores</li>
+		</ul>
 </ul>
 
 
