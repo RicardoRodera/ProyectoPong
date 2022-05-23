@@ -1,14 +1,18 @@
 <h1>ProyectoPong</h1>
 <h3>Proyecto de entornos de desarrollo</h3>
 <ul>
-  <li>Aprender interfaz grafica</li>
-  <li>Fisicas</li>
   <li>Menu/s</li>
   <ul>
     <li>Inicio</li>
     <li>Pausa</li>
+	<li>Escena de juego</li>
+	  
+  <li>Puntuacion</li>
+	  <li>Escena fin de partida</li>
+	  <li>x opciones</li>
   </ul>
-  <li>Control de la pala/s</li>
+  <li>Control de la pala</li>
+  <li>Control de la pala automatico</li>
   <li>Movimiento de la pelota</li>
   <ul>
     <li>Rebotes</li>
@@ -19,8 +23,6 @@
     <li>Efecto de pala sobre pelota</li>
   </ul>
   <li>Efectos sonoros</li>
-  <li>Puntuacion</li>
-  <li>Game over</li>
 </ul>
 
 
