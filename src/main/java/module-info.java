@@ -4,5 +4,7 @@ module com.example.pong {
 
 
     opens com.example.pong to javafx.fxml;
+    opens Modelo to javafx.fxml;
     exports com.example.pong;
+    exports Modelo;
 }
