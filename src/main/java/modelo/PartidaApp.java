@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;

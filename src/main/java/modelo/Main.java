@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
