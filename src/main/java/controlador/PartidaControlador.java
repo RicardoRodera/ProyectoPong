@@ -52,13 +52,15 @@ public class PartidaControlador  {
         Pane root = new Pane();
         Scene scene = new Scene(root, HelpTools.WIDTH, HelpTools.HEIGHT);
         scene.setFill(HelpTools.COLOR_FONDO);
+
+
         for(int i = 0;
-            i < HelpTools.WIDTH;
-            i += 50){
+            i < HelpTools.HEIGHT ;
+            i += 45){
             //parametros line - startX, startY, endX, endY
-            Line line  = new Line(HelpTools.WIDTH/2, i, HelpTools.WIDTH/2, i +10);
+            Line line  = new Line(HelpTools.WIDTH/2, i, HelpTools.WIDTH/2, i + 20);
             line.setStroke(HelpTools.COLOR_ITEMS);
-            line.setStrokeWidth(10);
+            line.setStrokeWidth(5);
             root.getChildren().add(line);
 
         }
