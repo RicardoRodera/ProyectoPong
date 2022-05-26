@@ -6,13 +6,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import modelo.Bola;
 import modelo.HelpTools;
+
 
 public class PartidaControlador  {
 
-    //PalaJugador palaJugador;
+    ControladorPalaJugador palaJugador;
     //PalaAutomatica palaAutomatica
-    //Bola bola;
+    Bola bola;
     Scene scene;
 
     public Scene getScene() {
@@ -24,10 +27,11 @@ public class PartidaControlador  {
     }
 
     public PartidaControlador() {
-        this.scene = crearScenePartida();
-        //this.palaJugador = new PalaJugador();
+
+        this.palaJugador = new ControladorPalaJugador();
         //this.palaAutomatica = new PalaAutomatica();
-        //this.bola = new Bola();
+        this.bola = new Bola();
+        this.scene = crearScenePartida();
     }
 
     private Scene crearScenePartida(){
@@ -42,8 +46,11 @@ public class PartidaControlador  {
             line.setStroke(HelpTools.COLOR_ITEMS);
             line.setStrokeWidth(10);
             root.getChildren().add(line);
-        }
 
+        }
+       // root.getChildren().add(rectangle);
+        root.getChildren().add(palaJugador.getRectangulo());
+        root.getChildren().add(bola);
         return scene;
     }
 
