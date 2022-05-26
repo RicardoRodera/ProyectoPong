@@ -3,8 +3,11 @@ package controlador;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -13,6 +16,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import modelo.Bola;
 import modelo.HelpTools;
+
+import static javafx.scene.input.KeyCode.DOWN;
+import static javafx.scene.input.KeyCode.UP;
 
 
 public class PartidaControlador  {
@@ -60,6 +66,14 @@ public class PartidaControlador  {
         root.getChildren().add(palaJugador.getRectangulo());
         root.getChildren().add(bola);
         movimientoBola();
+
+        scene.setOnKeyPressed(keyEvent -> {
+            movimientoPala(keyEvent.getCode());
+        });
+
+
+
+
         return scene;
     }
 
@@ -90,6 +104,17 @@ public class PartidaControlador  {
         );
         movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que bucle de movimiento de la bola sea infinito
         movimientoBola.play();
+
+    }
+
+
+    public void movimientoPala(KeyCode event){
+
+        if (UP.equals(event)) {
+            palaJugador.moverArriba();
+        } else if (DOWN.equals(event)) {
+            palaJugador.moverAbajo();
+        }
 
     }
 
