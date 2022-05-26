@@ -6,7 +6,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class PartidaControlador extends Scene {
-
+    private final static double WIDTH = 800;
+    private final static double HEIGHT = 600;
+    private final static Color COLOR_FONDO = Color.BLACK;
+    private final static Color COLOR_ITEMS = Color.WHITE;
     //Pala palaJugador;
     //Bola bola;
 
