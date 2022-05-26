@@ -1,5 +1,8 @@
 package controlador;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -7,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import modelo.Bola;
 import modelo.HelpTools;
 
@@ -15,8 +19,10 @@ public class PartidaControlador  {
 
     ControladorPalaJugador palaJugador;
     //PalaAutomatica palaAutomatica
-    Bola bola;
-    Scene scene;
+    private Bola bola;
+    private Scene scene;
+    private int velocidadX;
+    private int velocidadY;
 
     public Scene getScene() {
         return scene;
@@ -31,6 +37,8 @@ public class PartidaControlador  {
         this.palaJugador = new ControladorPalaJugador();
         //this.palaAutomatica = new PalaAutomatica();
         this.bola = new Bola();
+        this.velocidadX = HelpTools.VELOCIDAD_BOLA_NORMAL;
+        this.velocidadY = HelpTools.VELOCIDAD_BOLA_NORMAL;
         this.scene = crearScenePartida();
     }
 
@@ -48,10 +56,41 @@ public class PartidaControlador  {
             root.getChildren().add(line);
 
         }
-       // root.getChildren().add(rectangle);
+
         root.getChildren().add(palaJugador.getRectangulo());
         root.getChildren().add(bola);
+        movimientoBola();
         return scene;
+    }
+
+    /**
+     * Crea un bucle que mueve la bola y se ejecuta 60 veces por segundo
+     */
+    private void movimientoBola(){
+
+        Timeline movimientoBola = new Timeline(
+                new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
+                    bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
+                    bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
+                    if(bola.getPosicionEjeY() >= HelpTools.HEIGHT){
+                        this.velocidadY = -3;
+                    }
+                    if (bola.getPosicionEjeY() <= 0){
+                        this.velocidadY = 3;
+                    }
+
+                    if(bola.getPosicionEjeX() >= HelpTools.WIDTH){
+                        this.velocidadX = -3;
+                    }
+
+                    if(bola.getPosicionEjeX() <= 0 ){
+                        this.velocidadX = 3;
+                    }
+                })
+        );
+        movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que bucle de movimiento de la bola sea infinito
+        movimientoBola.play();
+
     }
 
 
