@@ -109,19 +109,19 @@ public class PartidaControlador  {
                 new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
                     bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
                     bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
-                    if(bola.getPosicionEjeY() >= HelpTools.HEIGHT){
-                        this.velocidadY = -3;
+                    if(bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT){
+                        this.velocidadY *= -1;
                     }
-                    if (bola.getPosicionEjeY() <= 0){
-                        this.velocidadY = 3;
-                    }
-
-                    if(bola.getPosicionEjeX() >= HelpTools.WIDTH){
-                        this.velocidadX = -3;
+                    if (bola.getPosicionEjeY()  - bola.getRadius() <= 0){
+                        this.velocidadY *= -1;
                     }
 
-                    if(bola.getPosicionEjeX() <= 0 ){
-                        this.velocidadX = 3;
+                    if(bola.getPosicionEjeX()  + bola.getRadius() >= HelpTools.WIDTH){
+                        this.velocidadX *= -1;
+                    }
+
+                    if(bola.getPosicionEjeX()  - bola.getRadius() <= 0 ){
+                        this.velocidadX *= -1;
                     }
 
                     scene.setOnKeyPressed(keyEvent -> {
