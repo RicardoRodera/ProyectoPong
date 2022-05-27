@@ -25,11 +25,11 @@ public class ControladorBola extends Node {
     }
 
     private void manejarChoqueParedes() {
-        if(bola.getPosicionEjeX()  + bola.getRadius() >= HelpTools.WIDTH){
+        if (bola.getPosicionEjeX() + bola.getRadius() >= HelpTools.WIDTH) {
             this.velocidadX *= -1;
         }
 
-        if(bola.getPosicionEjeX()  - bola.getRadius() <= 0 ){
+        if (bola.getPosicionEjeX() - bola.getRadius() <= 0) {
             this.velocidadX *= -1;
         }
     }
@@ -38,6 +38,7 @@ public class ControladorBola extends Node {
 
     }
 
+    // TODO: 27/05/2022 La pelota debe rebotar solo hacia la izquierda cuando hagamos los cambios que permitan marcar puntos.
     private void manejarChoquePalaJugador(ControladorPalaJugador palaJugador) {
         if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaJugador.getRectangulo().getX()
                 && this.bola.getPosicionEjeX() - bola.getRadius() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()) {
@@ -49,13 +50,13 @@ public class ControladorBola extends Node {
     }
 
     private void manejarChoqueSuelo() {
-        if(bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT){
+        if (bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT) {
             this.velocidadY *= -1;
         }
     }
 
     private void manejarChoqueTecho() {
-        if (bola.getPosicionEjeY()  - bola.getRadius() <= 0){
+        if (bola.getPosicionEjeY() - bola.getRadius() <= 0) {
             this.velocidadY *= -1;
         }
     }
