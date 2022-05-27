@@ -32,7 +32,6 @@ public class PartidaControlador  {
     boolean palaMoviendoseArriba = false;
     boolean palaMoviendoseAbajo = false;
 
-    private boolean parado = false;
     Timeline movimientoBola = null;
 
     public Scene getScene() {
@@ -80,25 +79,6 @@ public class PartidaControlador  {
         return scene;
     }
 
-    // Aqui quede pillado, no se como se hace una "pantalla".
-
-    /* private Scene crearPause(Pane root){
-        Scene scene = new Scene(root, HelpTools.WIDTH, HelpTools.HEIGHT);
-        scene.setFill(HelpTools.COLOR_FONDO_PAUSE);
-
-
-        for(int i = 0;
-            i < HelpTools.HEIGHT ;
-            i += 45){
-            //parametros line - startX, startY, endX, endY
-            Line line  = new Line(HelpTools.WIDTH/2, i, HelpTools.WIDTH/2, i + 20);
-            line.setStroke(HelpTools.COLOR_ITEMS);
-            line.setStrokeWidth(5);
-            root.getChildren().add(line);
-
-        }
-        return scene;
-    } */
 
     /**
      * Crea un bucle que mueve la bola y se ejecuta 60 veces por segundo
@@ -126,18 +106,7 @@ public class PartidaControlador  {
 
                     scene.setOnKeyPressed(keyEvent -> {
 
-                        if(parado){
-                            if(ESCAPE.equals(keyEvent.getCode())){
-                                movimientoBola.play();
-                                parado = false;
-                            }
-                        }else{
-                            if(ESCAPE.equals(keyEvent.getCode())){
-                                movimientoBola.pause();
-                                parado = true;
-                            }
                             movimientoPala(keyEvent.getCode());
-                        }
 
                     });
 
@@ -155,7 +124,7 @@ public class PartidaControlador  {
                     }
                 })
         );
-        movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que bucle de movimiento de la bola sea infinito
+        movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que el bucle de movimiento de la bola sea infinito
         movimientoBola.play();
 
     }
@@ -168,7 +137,6 @@ public class PartidaControlador  {
         } else if (DOWN.equals(code)) {
 
             palaMoviendoseAbajo = false;
-
 
         }
     }
@@ -183,7 +151,6 @@ public class PartidaControlador  {
         } else if (DOWN.equals(event)) {
 
                 palaMoviendoseAbajo = true;
-
 
         }
 
