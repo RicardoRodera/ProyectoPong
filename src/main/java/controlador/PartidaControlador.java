@@ -20,7 +20,7 @@ import modelo.HelpTools;
 import static javafx.scene.input.KeyCode.*;
 
 
-public class PartidaControlador  {
+public class PartidaControlador {
 
     ControladorPalaJugador palaJugador;
     //PalaAutomatica palaAutomatica
@@ -50,17 +50,17 @@ public class PartidaControlador  {
         this.scene = crearScenePartida();
     }
 
-    private Scene crearScenePartida(){
+    private Scene crearScenePartida() {
         Pane root = new Pane();
         Scene scene = new Scene(root, HelpTools.WIDTH, HelpTools.HEIGHT);
         scene.setFill(HelpTools.COLOR_FONDO);
 
 
-        for(int i = 0;
-            i < HelpTools.HEIGHT ;
-            i += 45){
+        for (int i = 0;
+             i < HelpTools.HEIGHT;
+             i += 45) {
             //parametros line - startX, startY, endX, endY
-            Line line  = new Line(HelpTools.WIDTH/2, i, HelpTools.WIDTH/2, i + 20);
+            Line line = new Line(HelpTools.WIDTH / 2, i, HelpTools.WIDTH / 2, i + 20);
             line.setStroke(HelpTools.COLOR_ITEMS);
             line.setStrokeWidth(5);
             root.getChildren().add(line);
@@ -73,13 +73,13 @@ public class PartidaControlador  {
 
         scene.setOnKeyPressed(keyEvent -> {
 
-            if(parado){
-               if(ESCAPE.equals(keyEvent.getCode())){
+            if (parado) {
+                if (ESCAPE.equals(keyEvent.getCode())) {
                     movimientoBola.play();
                     parado = false;
                 }
-            }else{
-                if(ESCAPE.equals(keyEvent.getCode())){
+            } else {
+                if (ESCAPE.equals(keyEvent.getCode())) {
                     movimientoBola.pause();
                     parado = true;
                 }
@@ -115,24 +115,24 @@ public class PartidaControlador  {
     /**
      * Crea un bucle que mueve la bola y se ejecuta 60 veces por segundo
      */
-    private void movimientoBola(){
+    private void movimientoBola() {
 
         movimientoBola = new Timeline(
-                new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
+                new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) -> {
                     bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
                     bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
-                    if(bola.getPosicionEjeY() >= HelpTools.HEIGHT){
+                    if (bola.getPosicionEjeY() >= HelpTools.HEIGHT) {
                         this.velocidadY = -3;
                     }
-                    if (bola.getPosicionEjeY() <= 0){
+                    if (bola.getPosicionEjeY() <= 0) {
                         this.velocidadY = 3;
                     }
 
-                    if(bola.getPosicionEjeX() >= HelpTools.WIDTH){
+                    if (bola.getPosicionEjeX() >= HelpTools.WIDTH) {
                         this.velocidadX = -3;
                     }
 
-                    if(bola.getPosicionEjeX() <= 0 ){
+                    if (bola.getPosicionEjeX() <= 0) {
                         this.velocidadX = 3;
                     }
                 })
@@ -143,22 +143,15 @@ public class PartidaControlador  {
     }
 
 
-    public void movimientoPala(KeyCode event){
+    public void movimientoPala(KeyCode event) {
 
         if (UP.equals(event)) {
-            if (palaJugador.getTopPala() >= 20){
-                palaJugador.moverArriba();
-            }
+            palaJugador.moverArriba();
         } else if (DOWN.equals(event)) {
-            if(palaJugador.getBottomPala() <= (scene.getHeight() - 20)){
-                palaJugador.moverAbajo();
-            }
-
+            palaJugador.moverAbajo();
         }
 
     }
-
-
 
 
 }

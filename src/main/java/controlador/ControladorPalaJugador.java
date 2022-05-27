@@ -8,7 +8,7 @@ public class ControladorPalaJugador {
     private static final double alto = 80;
     private static final double ancho = 10;
 
-    private static final int velocidad = 20;
+    private static final int velocidad = 3;
     private Rectangle rectangulo;
 
     public ControladorPalaJugador() {
@@ -29,19 +29,21 @@ public class ControladorPalaJugador {
         this.rectangulo.setY(HelpTools.HEIGHT / 2 - alto / 2);
     }
 
-    public double getTopPala(){
+    public double getTopPala() {
         return this.rectangulo.getY();
     }
 
-    public double getBottomPala(){
+    public double getBottomPala() {
         return this.rectangulo.getY() + alto;
     }
 
     public void moverArriba() {
+        if (getTopPala() > 0)
         this.rectangulo.setY(this.rectangulo.getY() - velocidad);
     }
 
     public void moverAbajo() {
-        this.rectangulo.setY(this.rectangulo.getY() + velocidad);
+        if (getBottomPala() < HelpTools.HEIGHT)
+            this.rectangulo.setY(this.rectangulo.getY() + velocidad);
     }
 }
