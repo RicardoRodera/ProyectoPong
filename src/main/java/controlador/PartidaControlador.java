@@ -71,22 +71,7 @@ public class PartidaControlador  {
         root.getChildren().add(bola);
         movimientoBola();
 
-        scene.setOnKeyPressed(keyEvent -> {
 
-            if(parado){
-               if(ESCAPE.equals(keyEvent.getCode())){
-                    movimientoBola.play();
-                    parado = false;
-                }
-            }else{
-                if(ESCAPE.equals(keyEvent.getCode())){
-                    movimientoBola.pause();
-                    parado = true;
-                }
-                movimientoPala(keyEvent.getCode());
-            }
-
-        });
 
 
         return scene;
@@ -135,6 +120,23 @@ public class PartidaControlador  {
                     if(bola.getPosicionEjeX() <= 0 ){
                         this.velocidadX = 3;
                     }
+
+                    scene.setOnKeyPressed(keyEvent -> {
+
+                        if(parado){
+                            if(ESCAPE.equals(keyEvent.getCode())){
+                                movimientoBola.play();
+                                parado = false;
+                            }
+                        }else{
+                            if(ESCAPE.equals(keyEvent.getCode())){
+                                movimientoBola.pause();
+                                parado = true;
+                            }
+                            movimientoPala(keyEvent.getCode());
+                        }
+
+                    });
                 })
         );
         movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que bucle de movimiento de la bola sea infinito
@@ -146,13 +148,13 @@ public class PartidaControlador  {
     public void movimientoPala(KeyCode event){
 
         if (UP.equals(event)) {
-            if (palaJugador.getTopPala() >= 20){
+
                 palaJugador.moverArriba();
-            }
+
         } else if (DOWN.equals(event)) {
-            if(palaJugador.getBottomPala() <= (scene.getHeight() - 20)){
+
                 palaJugador.moverAbajo();
-            }
+
 
         }
 

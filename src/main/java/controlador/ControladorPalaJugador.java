@@ -8,7 +8,7 @@ public class ControladorPalaJugador {
     private static final double alto = 80;
     private static final double ancho = 10;
 
-    private static final int velocidad = 3;
+    private static final int velocidad = 20;
     private Rectangle rectangulo;
 
     public ControladorPalaJugador() {
