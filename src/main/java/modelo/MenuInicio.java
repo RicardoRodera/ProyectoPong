@@ -34,7 +34,7 @@ public class MenuInicio extends Application {
     private static PartidaControlador partidaControlador = new PartidaControlador();
     private Parent crearContenido() {
         Pane root = new Pane();
-        root.setPrefSize(900, 600);
+        root.setPrefSize(HelpTools.WIDTH, HelpTools.HEIGHT);
 
         Rectangle bg = new Rectangle(900, 600);
 
@@ -48,7 +48,9 @@ public class MenuInicio extends Application {
         itemExit.setOnActivate(() -> System.exit(0));
 
         menuBox = new VBox(10,
-                new MenuItem("PLAY GAME"),
+                new MenuItem("EASY"),
+                new MenuItem("MEDIUM"),
+                new MenuItem("HARD"),
                 itemExit);
         menuBox.setAlignment(Pos.TOP_CENTER);
         menuBox.setTranslateX(360);
@@ -57,7 +59,7 @@ public class MenuInicio extends Application {
         Text informacion = new Text("IES Monte\n Naranco");
         informacion.setTranslateX(820);
         informacion.setTranslateY(570);
-        informacion.setFill(Color.WHITE);
+        informacion.setFill(HelpTools.COLOR_ITEMS);
         informacion.setFont(Font.font("", FontWeight.BOLD, 10));
         informacion.setOpacity(0.2);
 
@@ -74,7 +76,7 @@ public class MenuInicio extends Application {
         for (int i = 0; i < titulo.length(); i++) {
             Text letra = new Text(titulo.charAt(i) + "");
             letra.setFont(Font.font("", FontWeight.BOLD, 150));
-            letra.setFill(Color.WHITE);
+            letra.setFill(HelpTools.COLOR_ITEMS);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
 
@@ -100,7 +102,7 @@ public class MenuInicio extends Application {
             Rectangle frame = new Rectangle(650, 200);
             frame.setArcWidth(25);
             frame.setArcHeight(25);
-            frame.setStroke(Color.WHITE);
+            frame.setStroke(HelpTools.COLOR_ITEMS);
 
             getChildren().addAll(frame, contenido);
         }
@@ -124,7 +126,7 @@ public class MenuInicio extends Application {
         }
 
         public void setActive(boolean b) {
-            texto.setFill(b ? Color.WHITE : Color.GREY);
+            texto.setFill(b ? HelpTools.COLOR_ITEMS : Color.GREY);
         }
 
         public void setOnActivate(Runnable r) {
