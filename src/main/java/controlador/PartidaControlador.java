@@ -24,10 +24,8 @@ public class PartidaControlador  {
 
     ControladorPalaJugador palaJugador;
     //PalaAutomatica palaAutomatica
-    private Bola bola;
+    private ControladorBola bola;
     private Scene scene;
-    private int velocidadX;
-    private int velocidadY;
 
     boolean palaMoviendoseArriba = false;
     boolean palaMoviendoseAbajo = false;
@@ -46,9 +44,7 @@ public class PartidaControlador  {
 
         this.palaJugador = new ControladorPalaJugador();
         //this.palaAutomatica = new PalaAutomatica();
-        this.bola = new Bola();
-        this.velocidadX = HelpTools.VELOCIDAD_BOLA_NORMAL;
-        this.velocidadY = HelpTools.VELOCIDAD_BOLA_NORMAL;
+        this.bola = new ControladorBola();
         this.scene = crearScenePartida();
     }
 
@@ -70,7 +66,7 @@ public class PartidaControlador  {
         }
 
         root.getChildren().add(palaJugador.getRectangulo());
-        root.getChildren().add(bola);
+        root.getChildren().add(bola.getBola());
         movimientoBola();
 
 
@@ -87,22 +83,10 @@ public class PartidaControlador  {
 
         movimientoBola = new Timeline(
                 new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
-                    bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
-                    bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
-                    if(bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT){
-                        this.velocidadY *= -1;
-                    }
-                    if (bola.getPosicionEjeY()  - bola.getRadius() <= 0){
-                        this.velocidadY *= -1;
-                    }
 
-                    if(bola.getPosicionEjeX()  + bola.getRadius() >= HelpTools.WIDTH){
-                        this.velocidadX *= -1;
-                    }
+                    bola.mover();
+                    bola.manejarChoques(palaJugador);
 
-                    if(bola.getPosicionEjeX()  - bola.getRadius() <= 0 ){
-                        this.velocidadX *= -1;
-                    }
 
                     scene.setOnKeyPressed(keyEvent -> {
 

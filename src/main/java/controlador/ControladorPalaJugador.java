@@ -21,6 +21,14 @@ public class ControladorPalaJugador {
         return velocidad;
     }
 
+    public double getAlto(){
+        return alto;
+    }
+
+    public double getAncho(){
+        return ancho;
+    }
+
     public Rectangle getRectangulo() {
         return rectangulo;
     }
