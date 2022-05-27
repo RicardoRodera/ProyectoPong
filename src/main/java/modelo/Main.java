@@ -34,7 +34,7 @@ public class Main extends Application {
     private Scene cargarScene(){
 
         switch (semaforo){
-            case MENU_INICIO:
+        //    case MENU_INICIO: return MenuInicio.;
 
             case PARTIDA: return partidaControlador.getScene();
 

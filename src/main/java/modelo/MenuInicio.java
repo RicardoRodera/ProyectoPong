@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+
+import controlador.PartidaControlador;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -28,7 +30,8 @@ public class MenuInicio extends Application {
     private VBox menuBox;
     private int itemActual = 0;
     private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
-
+    private static Stage escenaInicio;
+    private static PartidaControlador partidaControlador = new PartidaControlador();
     private Parent crearContenido() {
         Pane root = new Pane();
         root.setPrefSize(900, 600);
@@ -117,7 +120,7 @@ public class MenuInicio extends Application {
 
             getChildren().addAll(texto);
             setActive(false);
-            setOnActivate(() -> System.out.println(nombre + " pulsado"));
+            setOnActivate(() -> escenaInicio.setScene(partidaControlador.getScene()));
         }
 
         public void setActive(boolean b) {
@@ -135,6 +138,7 @@ public class MenuInicio extends Application {
     }
 
     public void start(Stage escenaInicio) throws Exception {
+        this.escenaInicio = escenaInicio;
         Scene escena = new Scene(crearContenido());
         escena.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
