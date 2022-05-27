@@ -3,7 +3,7 @@ package modelo;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Bola extends Circle{
+public class Bola extends Circle {
     private static final double RADIO = 10;
 
     public Bola() {

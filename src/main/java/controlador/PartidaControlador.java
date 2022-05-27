@@ -29,6 +29,9 @@ public class PartidaControlador  {
     private int velocidadX;
     private int velocidadY;
 
+    boolean palaMoviendoseArriba = false;
+    boolean palaMoviendoseAbajo = false;
+
     private boolean parado = false;
     Timeline movimientoBola = null;
 
@@ -137,6 +140,19 @@ public class PartidaControlador  {
                         }
 
                     });
+
+                    scene.setOnKeyReleased(keyEvent -> {
+
+                            finalizarMovimientoPala(keyEvent.getCode());
+
+                    });
+
+                    if(palaMoviendoseArriba){
+                        palaJugador.moverArriba();
+                    }
+                    if(palaMoviendoseAbajo){
+                        palaJugador.moverAbajo();
+                    }
                 })
         );
         movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que bucle de movimiento de la bola sea infinito
@@ -144,16 +160,29 @@ public class PartidaControlador  {
 
     }
 
+    private void finalizarMovimientoPala(KeyCode code) {
+        if (UP.equals(code)) {
+
+            palaMoviendoseArriba = false;
+
+        } else if (DOWN.equals(code)) {
+
+            palaMoviendoseAbajo = false;
+
+
+        }
+    }
+
 
     public void movimientoPala(KeyCode event){
 
         if (UP.equals(event)) {
 
-                palaJugador.moverArriba();
+                palaMoviendoseArriba = true;
 
         } else if (DOWN.equals(event)) {
 
-                palaJugador.moverAbajo();
+                palaMoviendoseAbajo = true;
 
 
         }

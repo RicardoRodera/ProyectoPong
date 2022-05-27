@@ -8,8 +8,9 @@ public class ControladorPalaJugador {
     private static final double alto = 80;
     private static final double ancho = 10;
 
-    private static final int velocidad = 20;
+    private static final int velocidad = 5;
     private Rectangle rectangulo;
+
 
     public ControladorPalaJugador() {
         this.rectangulo = new Rectangle(HelpTools.WIDTH * 0.85, HelpTools.HEIGHT / 2 - alto / 2, ancho, alto);
@@ -41,6 +42,7 @@ public class ControladorPalaJugador {
         if (getTopPala() > 0)
         this.rectangulo.setY(this.rectangulo.getY() - velocidad);
     }
+
 
     public void moverAbajo() {
         if (getBottomPala() < HelpTools.HEIGHT)
