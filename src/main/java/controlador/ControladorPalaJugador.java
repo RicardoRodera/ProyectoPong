@@ -29,6 +29,14 @@ public class ControladorPalaJugador {
         this.rectangulo.setY(HelpTools.HEIGHT / 2 - alto / 2);
     }
 
+    public double getTopPala(){
+        return this.rectangulo.getY();
+    }
+
+    public double getBottomPala(){
+        return this.rectangulo.getY() + alto;
+    }
+
     public void moverArriba() {
         this.rectangulo.setY(this.rectangulo.getY() - velocidad);
     }

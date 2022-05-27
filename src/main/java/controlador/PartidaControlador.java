@@ -17,8 +17,7 @@ import javafx.util.Duration;
 import modelo.Bola;
 import modelo.HelpTools;
 
-import static javafx.scene.input.KeyCode.DOWN;
-import static javafx.scene.input.KeyCode.UP;
+import static javafx.scene.input.KeyCode.*;
 
 
 public class PartidaControlador  {
@@ -29,6 +28,9 @@ public class PartidaControlador  {
     private Scene scene;
     private int velocidadX;
     private int velocidadY;
+
+    private boolean parado = false;
+    Timeline movimientoBola = null;
 
     public Scene getScene() {
         return scene;
@@ -70,21 +72,52 @@ public class PartidaControlador  {
         movimientoBola();
 
         scene.setOnKeyPressed(keyEvent -> {
-            movimientoPala(keyEvent.getCode());
+
+            if(parado){
+               if(ESCAPE.equals(keyEvent.getCode())){
+                    movimientoBola.play();
+                    parado = false;
+                }
+            }else{
+                if(ESCAPE.equals(keyEvent.getCode())){
+                    movimientoBola.pause();
+                    parado = true;
+                }
+                movimientoPala(keyEvent.getCode());
+            }
+
         });
-
-
 
 
         return scene;
     }
+
+    // Aqui quede pillado, no se como se hace una "pantalla".
+
+    /* private Scene crearPause(Pane root){
+        Scene scene = new Scene(root, HelpTools.WIDTH, HelpTools.HEIGHT);
+        scene.setFill(HelpTools.COLOR_FONDO_PAUSE);
+
+
+        for(int i = 0;
+            i < HelpTools.HEIGHT ;
+            i += 45){
+            //parametros line - startX, startY, endX, endY
+            Line line  = new Line(HelpTools.WIDTH/2, i, HelpTools.WIDTH/2, i + 20);
+            line.setStroke(HelpTools.COLOR_ITEMS);
+            line.setStrokeWidth(5);
+            root.getChildren().add(line);
+
+        }
+        return scene;
+    } */
 
     /**
      * Crea un bucle que mueve la bola y se ejecuta 60 veces por segundo
      */
     private void movimientoBola(){
 
-        Timeline movimientoBola = new Timeline(
+        movimientoBola = new Timeline(
                 new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
                     bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
                     bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
@@ -113,9 +146,14 @@ public class PartidaControlador  {
     public void movimientoPala(KeyCode event){
 
         if (UP.equals(event)) {
-            palaJugador.moverArriba();
+            if (palaJugador.getTopPala() >= 20){
+                palaJugador.moverArriba();
+            }
         } else if (DOWN.equals(event)) {
-            palaJugador.moverAbajo();
+            if(palaJugador.getBottomPala() <= (scene.getHeight() - 20)){
+                palaJugador.moverAbajo();
+            }
+
         }
 
     }
