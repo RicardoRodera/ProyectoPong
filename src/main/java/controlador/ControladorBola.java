@@ -41,9 +41,9 @@ public class ControladorBola extends Node {
     private void manejarChoquePalaJugador(ControladorPalaJugador palaJugador) {
         if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaJugador.getRectangulo().getX()
                 && this.bola.getPosicionEjeX() - bola.getRadius() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()) {
-            if (this.bola.getPosicionEjeY() <= palaJugador.getTopPala() &&
-                    this.bola.getPosicionEjeY() >= palaJugador.getBottomPala()) {
-                velocidadX *= -1;
+            if (this.bola.getPosicionEjeY() >= palaJugador.getTopPala() &&
+                    this.bola.getPosicionEjeY() <= palaJugador.getBottomPala()) {
+                this.velocidadX *= -1;
             }
         }
     }
