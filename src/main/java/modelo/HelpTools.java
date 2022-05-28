@@ -10,6 +10,13 @@ public class HelpTools {
     public final static Color COLOR_ITEMS = Color.WHITE;
 
     public final static Color COLOR_FONDO_PAUSE = Color.DARKGRAY;
-    public final static int VELOCIDAD_BOLA_NORMAL = 3;
+    private static int VELOCIDAD_BOLA;
 
+    public static void setVelocidadBola(int velocidadBola) {
+        VELOCIDAD_BOLA = velocidadBola;
+    }
+
+    public static int getVelocidadBola() {
+        return VELOCIDAD_BOLA;
+    }
 }

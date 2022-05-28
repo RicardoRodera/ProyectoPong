@@ -31,7 +31,7 @@ public class MenuInicio extends Application {
     private int itemActual = 0;
     private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
     private static Stage escenaInicio;
-    private static PartidaControlador partidaControlador = new PartidaControlador();
+
     private Parent crearContenido() {
         Pane root = new Pane();
         root.setPrefSize(HelpTools.WIDTH, HelpTools.HEIGHT);
@@ -122,7 +122,10 @@ public class MenuInicio extends Application {
 
             getChildren().addAll(texto);
             setActive(false);
-            setOnActivate(() -> escenaInicio.setScene(partidaControlador.getScene()));
+            setOnActivate(() ->
+
+                   iniciarPartida(nombre));
+
         }
 
         public void setActive(boolean b) {
@@ -171,6 +174,29 @@ public class MenuInicio extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private static void iniciarPartida(String nivel){
+
+        switch (nivel){
+            case "EASY":
+                HelpTools.setVelocidadBola(Dificultad.EASY.getDificultad());
+                break;
+            case "MEDIUM":
+                HelpTools.setVelocidadBola(Dificultad.MEDIUM.getDificultad());
+                break;
+            case "HARD":
+                HelpTools.setVelocidadBola(Dificultad.HARD.getDificultad());
+                break;
+        }
+
+        PartidaControlador partidaControlador = new PartidaControlador();
+        setScene(partidaControlador.getScene());
+
+    }
+
+    public static void setScene(Scene scene){
+        escenaInicio.setScene(scene);
     }
 
 }

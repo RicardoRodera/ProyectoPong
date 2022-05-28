@@ -12,8 +12,8 @@ public class ControladorBola extends Node {
 
     public ControladorBola() {
         this.bola = new Bola();
-        this.velocidadX = HelpTools.VELOCIDAD_BOLA_NORMAL;
-        this.velocidadY = HelpTools.VELOCIDAD_BOLA_NORMAL;
+        this.velocidadX = HelpTools.getVelocidadBola();
+        this.velocidadY = HelpTools.getVelocidadBola();
     }
 
     public void manejarChoques(ControladorPalaJugador palaJugador) {

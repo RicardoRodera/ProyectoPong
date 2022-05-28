@@ -80,9 +80,9 @@ public class PartidaControlador  {
      * Crea un bucle que mueve la bola y se ejecuta 60 veces por segundo
      */
     private void movimientoBola(){
-
+        final double DURACION_SEGUNDOS = 0.017;
         movimientoBola = new Timeline(
-                new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) ->{
+                new KeyFrame(Duration.seconds(DURACION_SEGUNDOS), (ActionEvent ae) ->{
 
                     bola.mover();
                     bola.manejarChoques(palaJugador);
