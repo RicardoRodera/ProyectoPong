@@ -180,13 +180,13 @@ public class MenuInicio extends Application {
 
         switch (nivel){
             case "EASY":
-                HelpTools.setVelocidadBola(Dificultad.EASY.getDificultad());
+                HelpTools.setVelocidadBola(Dificultad.EASY.getVelocidad());
                 break;
             case "MEDIUM":
-                HelpTools.setVelocidadBola(Dificultad.MEDIUM.getDificultad());
+                HelpTools.setVelocidadBola(Dificultad.MEDIUM.getVelocidad());
                 break;
             case "HARD":
-                HelpTools.setVelocidadBola(Dificultad.HARD.getDificultad());
+                HelpTools.setVelocidadBola(Dificultad.HARD.getVelocidad());
                 break;
         }
 
