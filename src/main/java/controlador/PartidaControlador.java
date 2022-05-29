@@ -65,13 +65,20 @@ public class PartidaControlador  {
         Rectangle bg = new Rectangle(HelpTools.WIDTH, HelpTools.HEIGHT);
         bg.setOpacity(0.8);
 
-        Text texto = new Text("PULSA  [ESPACIO] \nPARA REANUDAR");
-        texto.setFill(HelpTools.COLOR_ITEMS);
-        texto.setFont(Font.font("", FontWeight.BOLD, 50));
-        texto.setTranslateX(250);
-        texto.setTranslateY(285);
+        Text textoReanudar = new Text("PULSA  [ESPACIO] \nPARA REANUDAR");
+        textoReanudar.setFill(HelpTools.COLOR_ITEMS);
+        textoReanudar.setFont(Font.font("", FontWeight.BOLD, 50));
+        textoReanudar.setTranslateX(250);
+        textoReanudar.setTranslateY(285);
 
-        pane.getChildren().addAll(bg, texto);
+        Text textoSalir = new Text("PULSA  [ESC]  PARA ABANDONAR LA PARTIDA");
+        textoSalir.setTranslateX(30);
+        textoSalir.setTranslateY(570);
+        textoSalir.setFill(HelpTools.COLOR_ITEMS);
+        textoSalir.setFont(Font.font("", FontWeight.BOLD, 15));
+        textoSalir.setOpacity(0.2);
+
+        pane.getChildren().addAll(bg, textoReanudar, textoSalir);
         return pane;
     }
 
@@ -192,6 +199,8 @@ public class PartidaControlador  {
                 this.root.getChildren().add(panePausa);
             }
 
+        } else if(ESCAPE.equals(event)){
+            System.exit(0);
         }
 
     }

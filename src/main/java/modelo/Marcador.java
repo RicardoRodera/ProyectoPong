@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class Marcador extends HBox {
@@ -20,7 +21,7 @@ public class Marcador extends HBox {
    private void inicializar() {
 
      setTranslateY(50);
-      setMinWidth(HelpTools.WIDTH);
+     setMinWidth(HelpTools.WIDTH);
      setAlignment(Pos.CENTER);
      setSpacing(100);
 
@@ -33,7 +34,7 @@ public class Marcador extends HBox {
    private HBox inicializarMarcadorIa(){
       HBox puntiacionIA = new HBox();
       this.puntosIA = new Text("0");
-      puntosIA.setFont(Font.font(TAMANO_NUMEROS));
+      puntosIA.setFont(Font.font("", FontWeight.BOLD ,TAMANO_NUMEROS));
       puntosIA.setFill(HelpTools.COLOR_ITEMS);
       puntiacionIA.getChildren().add(puntosIA);
       return puntiacionIA;
@@ -42,7 +43,7 @@ public class Marcador extends HBox {
    private HBox inicializarMarcadorJugador(){
       HBox puntuacionJugador = new HBox();
       this.puntosJugador = new Text("0");
-      puntosJugador.setFont(Font.font(TAMANO_NUMEROS));
+      puntosJugador.setFont(Font.font("", FontWeight.BOLD ,TAMANO_NUMEROS));
       puntosJugador.setFill(HelpTools.COLOR_ITEMS);
       puntuacionJugador.getChildren().add(puntosJugador);
       return puntuacionJugador;
