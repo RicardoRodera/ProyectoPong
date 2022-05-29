@@ -13,6 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.Bola;
 import modelo.HelpTools;
@@ -27,9 +30,12 @@ public class PartidaControlador  {
     private ControladorPalaOponente controladorPalaOponente;
     private ControladorBola bola;
     private Scene scene;
+    private Pane root;
+    private Pane panePausa;
     private ControladorMarcador marcador;
     boolean palaMoviendoseArriba = false;
     boolean palaMoviendoseAbajo = false;
+    boolean pausa = false;
 
     Timeline movimientoBola = null;
 
@@ -48,11 +54,29 @@ public class PartidaControlador  {
         this.bola = new ControladorBola();
         this.marcador = new ControladorMarcador();
         this.scene = crearScenePartida();
+        this.panePausa = crearPanePausa();
 
     }
 
+    private Pane crearPanePausa() {
+        Pane pane = new Pane();
+        pane.setPrefSize(HelpTools.WIDTH, HelpTools.HEIGHT);
+
+        Rectangle bg = new Rectangle(HelpTools.WIDTH, HelpTools.HEIGHT);
+        bg.setOpacity(0.8);
+
+        Text texto = new Text("PULSA  [ESPACIO] \nPARA REANUDAR");
+        texto.setFill(HelpTools.COLOR_ITEMS);
+        texto.setFont(Font.font("", FontWeight.BOLD, 50));
+        texto.setTranslateX(250);
+        texto.setTranslateY(285);
+
+        pane.getChildren().addAll(bg, texto);
+        return pane;
+    }
+
     private Scene crearScenePartida(){
-        Pane root = new Pane();
+        this.root = new Pane();
         Scene scene = new Scene(root, HelpTools.WIDTH, HelpTools.HEIGHT);
         scene.setFill(HelpTools.COLOR_FONDO);
 
@@ -75,7 +99,11 @@ public class PartidaControlador  {
         root.getChildren().add(marcador.getMarcador());
         movimientoBola();
 
+        scene.setOnKeyReleased(keyEvent -> {
 
+            movimientoPala(keyEvent.getCode());
+
+        });
 
 
         return scene;
@@ -152,11 +180,20 @@ public class PartidaControlador  {
 
                 palaMoviendoseAbajo = true;
 
+        } else if (SPACE.equals(event)){
+
+            if(pausa){
+                pausa = false;
+                movimientoBola.play();
+                this.root.getChildren().remove(panePausa);
+            } else{
+                pausa= true;
+                movimientoBola.pause();
+                this.root.getChildren().add(panePausa);
+            }
+
         }
 
     }
-
-
-
 
 }
