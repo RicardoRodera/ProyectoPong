@@ -16,17 +16,18 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import modelo.Bola;
 import modelo.HelpTools;
+import modelo.Marcador;
 
 import static javafx.scene.input.KeyCode.*;
 
 
 public class PartidaControlador  {
 
-    ControladorPalaJugador palaJugador;
-    ControladorPalaOponente controladorPalaOponente;
+    private ControladorPalaJugador palaJugador;
+    private ControladorPalaOponente controladorPalaOponente;
     private ControladorBola bola;
     private Scene scene;
-
+    private ControladorMarcador marcador;
     boolean palaMoviendoseArriba = false;
     boolean palaMoviendoseAbajo = false;
 
@@ -45,7 +46,9 @@ public class PartidaControlador  {
         this.palaJugador = new ControladorPalaJugador();
         this.controladorPalaOponente = new ControladorPalaOponente();
         this.bola = new ControladorBola();
+        this.marcador = new ControladorMarcador();
         this.scene = crearScenePartida();
+
     }
 
     private Scene crearScenePartida(){
@@ -65,9 +68,11 @@ public class PartidaControlador  {
 
         }
 
+
         root.getChildren().add(palaJugador.getRectangulo());
         root.getChildren().add(bola.getBola());
         root.getChildren().add(controladorPalaOponente.getRectangulo());
+        root.getChildren().add(marcador.getMarcador());
         movimientoBola();
 
 
@@ -108,6 +113,14 @@ public class PartidaControlador  {
                         palaJugador.moverAbajo();
                     }
                     controladorPalaOponente.mover(bola.getBola());
+
+                    if (bola.puntoIA()) {
+                        marcador.anotarPuntoIA();
+                    }
+
+                    if (bola.puntoJugador()) {
+                        marcador.anotarPuntoJugador();
+                    }
                 })
 
         );

@@ -34,6 +34,21 @@ public class ControladorBola extends Node {
         }
     }
 
+    public boolean puntoIA(){
+        if (bola.getPosicionEjeX() + bola.getRadius() >= HelpTools.WIDTH) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean puntoJugador(){
+        if (bola.getPosicionEjeX() - bola.getRadius() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+
     private void manejarChoquePalaIA(ControladorPalaOponente palaOponente) {
         if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaOponente.getRectangulo().getX()
                 && this.bola.getPosicionEjeX() - bola.getRadius() <= palaOponente.getRectangulo().getX() + palaOponente.getAncho()) {
