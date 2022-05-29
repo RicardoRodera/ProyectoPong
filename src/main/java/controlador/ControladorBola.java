@@ -16,11 +16,11 @@ public class ControladorBola extends Node {
         this.velocidadY = HelpTools.getVelocidadBola();
     }
 
-    public void manejarChoques(ControladorPalaJugador palaJugador) {
+    public void manejarChoques(ControladorPalaJugador palaJugador, ControladorPalaOponente palaOponente) {
         manejarChoqueTecho();
         manejarChoqueSuelo();
         manejarChoquePalaJugador(palaJugador);
-        manejarChoquePalaIA();
+        manejarChoquePalaIA(palaOponente);
         manejarChoqueParedes();
     }
 
@@ -34,30 +34,142 @@ public class ControladorBola extends Node {
         }
     }
 
-    private void manejarChoquePalaIA() {
-
+    private void manejarChoquePalaIA(ControladorPalaOponente palaOponente) {
+        if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaOponente.getRectangulo().getX()
+                && this.bola.getPosicionEjeX() - bola.getRadius() <= palaOponente.getRectangulo().getX() + palaOponente.getAncho()) {
+            if (this.bola.getPosicionEjeY() >= palaOponente.getTopPala() &&
+                    this.bola.getPosicionEjeY() <= palaOponente.getBottomPala()) {
+                int anguloDeRebote = calcularAngulo(palaOponente);
+                int velocidadBola = HelpTools.getVelocidadBola();
+                switch (anguloDeRebote) {
+                    case 60:
+                        this.velocidadX = velocidadBola * (0.5);
+                        this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
+                        break;
+                    case 45:
+                        this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
+                        this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
+                        break;
+                    case 30:
+                        this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
+                        this.velocidadY = velocidadBola * (0.5);
+                        break;
+                    case 0:
+                        this.velocidadX = velocidadBola;
+                        this.velocidadY = 0;
+                        break;
+                    case -30:
+                        this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
+                        this.velocidadY = -velocidadBola * (0.5);
+                        break;
+                    case -45:
+                        this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
+                        this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
+                        break;
+                    case -60:
+                        this.velocidadX = velocidadBola * (0.5);
+                        this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
+                        break;
+                }
+            }
+        }
     }
 
-    // TODO: 27/05/2022 La pelota debe rebotar solo hacia la izquierda cuando hagamos los cambios que permitan marcar puntos.
+    private int calcularAngulo(ControladorPalaOponente palaOponente) {
+        double diferencia = bola.getPosicionEjeY() - palaOponente.getTopPala();
+        int angulo = 0;
+        if (diferencia < palaOponente.getAlto() / 7) {
+            angulo = 60;
+        } else if (diferencia < palaOponente.getAlto() * 2 / 7) {
+            angulo = 45;
+        } else if (diferencia < palaOponente.getAlto() * 3 / 7) {
+            angulo = 30;
+        } else if (diferencia < palaOponente.getAlto() * 4 / 7) {
+            angulo = 0;
+        } else if (diferencia < palaOponente.getAlto() * 5 / 7) {
+            angulo = -30;
+        } else if (diferencia < palaOponente.getAlto() * 6 / 7) {
+            angulo = -45;
+        } else if (diferencia <= palaOponente.getAlto()) {
+            angulo = -60;
+        }
+
+        return angulo;
+    }
+
+
     private void manejarChoquePalaJugador(ControladorPalaJugador palaJugador) {
         if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaJugador.getRectangulo().getX()
                 && this.bola.getPosicionEjeX() - bola.getRadius() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()) {
             if (this.bola.getPosicionEjeY() >= palaJugador.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaJugador.getBottomPala()) {
-                this.velocidadX *= -1;
+                int anguloDeRebote = calcularAngulo(palaJugador);
+                int velocidadBola = HelpTools.getVelocidadBola();
+                switch (anguloDeRebote) {
+                    case 60:
+                        this.velocidadX = -velocidadBola * (0.5);
+                        this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
+                        break;
+                    case 45:
+                        this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
+                        this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
+                        break;
+                    case 30:
+                        this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
+                        this.velocidadY = velocidadBola * (0.5);
+                        break;
+                    case 0:
+                        this.velocidadX = -velocidadBola;
+                        this.velocidadY = 0;
+                        break;
+                    case -30:
+                        this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
+                        this.velocidadY = -velocidadBola * (0.5);
+                        break;
+                    case -45:
+                        this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
+                        this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
+                        break;
+                    case -60:
+                        this.velocidadX = -velocidadBola * (0.5);
+                        this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
+                        break;
+                }
             }
         }
     }
 
+    private int calcularAngulo(ControladorPalaJugador palaJugador) {
+        double diferencia = bola.getPosicionEjeY() - palaJugador.getTopPala();
+        int angulo = 0;
+        if (diferencia < palaJugador.getAlto() / 7) {
+            angulo = 60;
+        } else if (diferencia < palaJugador.getAlto() * 2 / 7) {
+            angulo = 45;
+        } else if (diferencia < palaJugador.getAlto() * 3 / 7) {
+            angulo = 30;
+        } else if (diferencia < palaJugador.getAlto() * 4 / 7) {
+            angulo = 0;
+        } else if (diferencia < palaJugador.getAlto() * 5 / 7) {
+            angulo = -30;
+        } else if (diferencia < palaJugador.getAlto() * 6 / 7) {
+            angulo = -45;
+        } else if (diferencia <= palaJugador.getAlto()) {
+            angulo = -60;
+        }
+
+        return angulo;
+    }
+
     private void manejarChoqueSuelo() {
         if (bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT) {
-            this.velocidadY *= -1;
+            this.velocidadY = Math.abs(this.velocidadY);
         }
     }
 
     private void manejarChoqueTecho() {
         if (bola.getPosicionEjeY() - bola.getRadius() <= 0) {
-            this.velocidadY *= -1;
+            this.velocidadY = -1 * Math.abs(this.velocidadY);
         }
     }
 
@@ -66,7 +178,7 @@ public class ControladorBola extends Node {
     }
 
     public void mover() {
-        bola.setPosicionEjeY(bola.getPosicionEjeY() + velocidadY);
+        bola.setPosicionEjeY(bola.getPosicionEjeY() - velocidadY);
         bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
     }
 }

@@ -86,7 +86,7 @@ public class PartidaControlador  {
                 new KeyFrame(Duration.seconds(DURACION_SEGUNDOS), (ActionEvent ae) ->{
 
                     bola.mover();
-                    bola.manejarChoques(palaJugador);
+                    bola.manejarChoques(palaJugador, controladorPalaOponente);
 
 
                     scene.setOnKeyPressed(keyEvent -> {
