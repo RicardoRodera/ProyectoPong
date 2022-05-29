@@ -61,9 +61,9 @@ public class ControladorPalaOponente {
     }
 
     public void mover(Bola bola) {
-        if (bola.getPosicionEjeY() > getCentroPala()) {
+        if (bola.getPosicionEjeY() > getCentroPala() + getAlto()/10) {
             moverAbajo();
-        } else if (bola.getPosicionEjeY() < getCentroPala()) {
+        } else if (bola.getPosicionEjeY() < getCentroPala() - getAlto()/10) {
             moverArriba();
         }
     }
