@@ -23,7 +23,7 @@ import static javafx.scene.input.KeyCode.*;
 public class PartidaControlador  {
 
     ControladorPalaJugador palaJugador;
-    //PalaAutomatica palaAutomatica
+    ControladorPalaOponente controladorPalaOponente;
     private ControladorBola bola;
     private Scene scene;
 
@@ -43,7 +43,7 @@ public class PartidaControlador  {
     public PartidaControlador() {
 
         this.palaJugador = new ControladorPalaJugador();
-        //this.palaAutomatica = new PalaAutomatica();
+        this.controladorPalaOponente = new ControladorPalaOponente();
         this.bola = new ControladorBola();
         this.scene = crearScenePartida();
     }
@@ -67,6 +67,7 @@ public class PartidaControlador  {
 
         root.getChildren().add(palaJugador.getRectangulo());
         root.getChildren().add(bola.getBola());
+        root.getChildren().add(controladorPalaOponente.getRectangulo());
         movimientoBola();
 
 
@@ -106,7 +107,9 @@ public class PartidaControlador  {
                     if(palaMoviendoseAbajo){
                         palaJugador.moverAbajo();
                     }
+                    controladorPalaOponente.mover(bola.getBola());
                 })
+
         );
         movimientoBola.setCycleCount(Timeline.INDEFINITE);//Esta linea hace que el bucle de movimiento de la bola sea infinito
         movimientoBola.play();
