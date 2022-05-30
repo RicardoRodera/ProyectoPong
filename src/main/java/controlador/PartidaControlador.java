@@ -16,12 +16,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import modelo.Bola;
-import modelo.HelpTools;
-import modelo.Marcador;
-import modelo.MenuInicio;
+import modelo.*;
 
 import static javafx.scene.input.KeyCode.*;
 
@@ -78,8 +74,8 @@ public class PartidaControlador  {
         textoSalir.setTranslateX(30);
         textoSalir.setTranslateY(570);
         textoSalir.setFill(HelpTools.COLOR_ITEMS);
-        textoSalir.setFont(Font.font("", FontWeight.BOLD, 17));
-        textoSalir.setOpacity(0.5);
+        textoSalir.setFont(Font.font("", FontWeight.BOLD, 15));
+        textoSalir.setOpacity(0.2);
 
         pane.getChildren().addAll(bg, textoReanudar, textoSalir);
         return pane;
@@ -165,6 +161,10 @@ public class PartidaControlador  {
                         palaJugador.resetearPala();
                         controladorPalaOponente.resetearPala();
                     }
+
+                    if(marcador.finalPartida()){
+                        finalizar();
+                    }
                 })
 
         );
@@ -209,11 +209,15 @@ public class PartidaControlador  {
             }
 
         } else if(ESCAPE.equals(event)){
-            if(pausa) {
-                MenuInicio.reiniciar();
-            }
+            System.exit(0);
         }
 
+    }
+
+    private void finalizar(){
+        movimientoBola.stop();
+        EscenaFin escenaFin = new EscenaFin();
+        MenuInicio.setScene(escenaFin.getEscena());
     }
 
 }
