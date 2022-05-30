@@ -75,7 +75,7 @@ Scene escena;
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent tocaTecla) -> {
             if(tocaTecla.getCode() == KeyCode.UP){
-
+            MenuInicio.reiniciar();
 
             }
             if(tocaTecla.getCode() == KeyCode.DOWN){
@@ -103,7 +103,7 @@ Scene escena;
         letras.setAlignment(Pos.CENTER);
         for (int i = 0; i < header.length(); i++) {
             Text letra = new Text(header.charAt(i) + "");
-            letra.setFont(Font.font("", FontWeight.BOLD, 151));
+            letra.setFont(Font.font("", FontWeight.BOLD, 155));
             letra.setFill(Color.WHITE);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
