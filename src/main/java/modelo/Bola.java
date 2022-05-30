@@ -7,7 +7,7 @@ public class Bola extends Circle {
     private static final double RADIO = 10;
 
     public Bola() {
-        super(300, 400, RADIO, HelpTools.COLOR_ITEMS);
+        super(300, 300, RADIO, HelpTools.COLOR_ITEMS);
     }
 
     public double getPosicionEjeX() {
