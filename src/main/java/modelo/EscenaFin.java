@@ -5,6 +5,7 @@ package modelo;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -35,6 +36,7 @@ import java.io.FileNotFoundException;
 public class EscenaFin{
 
 Scene escena;
+
 
     public EscenaFin() {
         this.escena = EndScene();
@@ -71,6 +73,16 @@ Scene escena;
         crearTexto().setLayoutX(300);
         crearTexto().setLayoutY(50);
 
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent tocaTecla) -> {
+            if(tocaTecla.getCode() == KeyCode.UP){
+
+
+            }
+            if(tocaTecla.getCode() == KeyCode.DOWN){
+                Platform.exit();
+            }
+        });
+
         return scene;
 
     }
@@ -91,7 +103,7 @@ Scene escena;
         letras.setAlignment(Pos.CENTER);
         for (int i = 0; i < header.length(); i++) {
             Text letra = new Text(header.charAt(i) + "");
-            letra.setFont(Font.font("", FontWeight.BOLD, 135));
+            letra.setFont(Font.font("", FontWeight.BOLD, 151));
             letra.setFill(Color.WHITE);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
