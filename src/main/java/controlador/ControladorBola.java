@@ -12,8 +12,8 @@ public class ControladorBola extends Node {
 
     public ControladorBola() {
         this.bola = new Bola();
-        this.velocidadX = HelpTools.getVelocidadBola();
-        this.velocidadY = HelpTools.getVelocidadBola();
+        this.velocidadX = - HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
+        this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
     }
 
     public void manejarChoques(ControladorPalaJugador palaJugador, ControladorPalaOponente palaOponente) {
@@ -198,16 +198,16 @@ public class ControladorBola extends Node {
     }
 
     public void reiniciarBolaPuntoIA(){
-        this.bola.setPosicionEjeX( 150);
+        this.bola.setPosicionEjeX(200);
         this.bola.setPosicionEjeY(300);
-        this.velocidadX = - HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
+        this.velocidadX = HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
         this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
     }
 
     public void reiniciarBolaPuntoJugador(){
-        this.bola.setPosicionEjeX(HelpTools.WIDTH - 150);
+        this.bola.setPosicionEjeX(HelpTools.WIDTH - 200);
         this.bola.setPosicionEjeY(300);
-        this.velocidadX =  HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
+        this.velocidadX = - HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
         this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
     }
 }
