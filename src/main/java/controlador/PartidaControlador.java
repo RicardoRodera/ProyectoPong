@@ -150,10 +150,13 @@ public class PartidaControlador  {
 
                     if (bola.puntoIA()) {
                         marcador.anotarPuntoIA();
+                        bola.reiniciarBolaPuntoIA();
+                        //palaJugador.
                     }
 
                     if (bola.puntoJugador()) {
                         marcador.anotarPuntoJugador();
+                        bola.reiniciarBolaPuntoJugador();
                     }
 
                     if(marcador.finalPartida()){
