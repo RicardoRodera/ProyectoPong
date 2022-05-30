@@ -1,6 +1,6 @@
 package controlador;
 
-//import javafx.scene.
+import javafx.scene.*;
 
 public class ControladorSonidos {
 

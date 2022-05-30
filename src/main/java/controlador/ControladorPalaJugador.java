@@ -56,4 +56,9 @@ public class ControladorPalaJugador {
         if (getBottomPala() < HelpTools.HEIGHT)
             this.rectangulo.setY(this.rectangulo.getY() + velocidad);
     }
+
+    public void resetearPala(){
+        this.rectangulo.setX(HelpTools.WIDTH * 0.85);
+        this.rectangulo.setY(HelpTools.HEIGHT / 2 - alto / 2);
+    }
 }
