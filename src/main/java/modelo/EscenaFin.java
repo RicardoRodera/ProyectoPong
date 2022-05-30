@@ -36,16 +36,18 @@ import java.io.FileNotFoundException;
 public class EscenaFin{
 
 Scene escena;
+boolean victoriaJugador;
 
 
-    public EscenaFin() {
+    public EscenaFin(boolean victoriaJugador) {
         this.escena = EndScene();
+        this.victoriaJugador = victoriaJugador;
     }
 
 
     public Scene EndScene() {
 
-        crearTexto();
+        crearTexto(victoriaJugador);
         Pane layout = new Pane();
         Text newGame = new Text();
         Text quitGame = new Text();
@@ -69,9 +71,9 @@ Scene escena;
         newGame.setLayoutX(350);
         newGame.setLayoutY(400);
         quitGame.setLayoutY(450);
-        layout.getChildren().add(crearTexto());
-        crearTexto().setLayoutX(300);
-        crearTexto().setLayoutY(50);
+        layout.getChildren().add(crearTexto(victoriaJugador));
+        crearTexto(victoriaJugador).setLayoutX(300);
+        crearTexto(victoriaJugador).setLayoutY(50);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent tocaTecla) -> {
             if(tocaTecla.getCode() == KeyCode.UP){
@@ -97,13 +99,14 @@ Scene escena;
 
 
 
-    private Node crearTexto() {
+    private Node crearTexto(boolean victoriaJugador) {
+        if(!victoriaJugador){
         String header = "GAME OVER";
         HBox letras = new HBox(0);
         letras.setAlignment(Pos.CENTER);
         for (int i = 0; i < header.length(); i++) {
             Text letra = new Text(header.charAt(i) + "");
-            letra.setFont(Font.font("", FontWeight.BOLD, 155));
+            letra.setFont(Font.font("", FontWeight.BOLD, 100));
             letra.setFill(Color.WHITE);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
@@ -114,8 +117,29 @@ Scene escena;
             fachero.setAutoReverse(true);
             fachero.setCycleCount(1);
             fachero.play();
+        }return letras;
         }
-    return letras;
+        else{
+            String header = "OF \nBITCH MOTHER";
+            HBox letras = new HBox(0);
+            letras.setAlignment(Pos.CENTER);
+            for (int i = 0; i < header.length(); i++) {
+                Text letraz = new Text(header.charAt(i) + "");
+                letraz.setFont(Font.font("", FontWeight.BOLD, 100));
+                letraz.setFill(Color.WHITE);
+                letraz.setOpacity(0);
+                letras.getChildren().add(letraz);
+
+                FadeTransition fachero = new FadeTransition(Duration.seconds(2), letraz);
+                fachero.setDelay(Duration.millis(i * 50));
+                fachero.setToValue(1);
+                fachero.setAutoReverse(true);
+                fachero.setCycleCount(1);
+                fachero.play();
+            }return letras;
+        }
+
+
     }
 
 
