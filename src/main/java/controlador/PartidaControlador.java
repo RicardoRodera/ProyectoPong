@@ -16,8 +16,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import modelo.*;
+import modelo.Bola;
+import modelo.HelpTools;
+import modelo.Marcador;
+import modelo.MenuInicio;
 
 import static javafx.scene.input.KeyCode.*;
 
@@ -158,12 +162,6 @@ public class PartidaControlador  {
                         marcador.anotarPuntoJugador();
                         bola.reiniciarBolaPuntoJugador();
                     }
-
-                    if(marcador.finalPartida()){
-
-                        finalizar();
-
-                    }
                 })
 
         );
@@ -208,15 +206,9 @@ public class PartidaControlador  {
             }
 
         } else if(ESCAPE.equals(event)){
-            System.exit(0);
+            MenuInicio.reiniciar();
         }
 
-    }
-
-    private void finalizar(){
-        movimientoBola.stop();
-        EscenaFin escenaFin = new EscenaFin();
-        MenuInicio.setScene(escenaFin.getEscena());
     }
 
 }

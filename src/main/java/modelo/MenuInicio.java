@@ -33,7 +33,7 @@ public class MenuInicio extends Application {
     private int itemActual = 0;
     private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
     private static Stage escenaInicio;
-    private Scene escena;
+    private static Scene escena;
 
     private Parent crearContenido() {
         Pane root = new Pane();
@@ -202,7 +202,7 @@ public class MenuInicio extends Application {
         escenaInicio.setScene(scene);
     }
 
-    public Scene getEscena() {
-        return escena;
+    public static void reiniciar() {
+        escenaInicio.setScene(escena);
     }
 }
