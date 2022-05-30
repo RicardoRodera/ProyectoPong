@@ -71,8 +71,8 @@ Scene escena;
         crearTexto().setLayoutX(300);
         crearTexto().setLayoutY(50);
 
+        return scene;
 
-        return  null;
     }
 
 
@@ -107,12 +107,10 @@ Scene escena;
     }
 
 
-
-
-
-
-
+    public Scene getEscena() {
+        return escena;
     }
+}
 
 
 
