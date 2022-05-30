@@ -69,6 +69,10 @@ public class ControladorPalaOponente {
     }
 
     public void setDificultad(int velocidadBola) {
-        this.velocidad = velocidadBola * 2 / 3;
+        if(HelpTools.getVelocidadBola() < 5) {
+            this.velocidad = velocidadBola * 2 / 3;
+        } else {
+            this.velocidad = velocidadBola * 3 / 4;
+        }
     }
 }
