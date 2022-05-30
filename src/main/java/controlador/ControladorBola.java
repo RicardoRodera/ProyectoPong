@@ -199,14 +199,14 @@ public class ControladorBola extends Node {
 
     public void reiniciarBolaPuntoIA(){
         this.bola.setPosicionEjeX( 150);
-        this.bola.setPosicionEjeY(400);
+        this.bola.setPosicionEjeY(300);
         this.velocidadX = HelpTools.getVelocidadBola() * Math.sqrt(2)/2;
         this.velocidadY = HelpTools.getVelocidadBola() * Math.sqrt(2)/2;
     }
 
     public void reiniciarBolaPuntoJugador(){
         this.bola.setPosicionEjeX(HelpTools.WIDTH - 150);
-        this.bola.setPosicionEjeY(400);
+        this.bola.setPosicionEjeY(300);
         this.velocidadX = (HelpTools.getVelocidadBola() * Math.sqrt(2)/2) * -1;
         this.velocidadY = (HelpTools.getVelocidadBola() * Math.sqrt(2)/2) * -1;
     }
