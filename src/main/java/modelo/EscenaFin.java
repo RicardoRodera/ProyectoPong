@@ -27,7 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import HelpTools;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,7 +36,9 @@ public class EscenaFin{
 
 Scene escena;
 
-this.escena = EndScene();
+    public EscenaFin() {
+        this.escena = EndScene();
+    }
 
 
     public Scene EndScene() {
@@ -70,17 +72,7 @@ this.escena = EndScene();
         crearTexto().setLayoutY(50);
 
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-            if (event.getCode() == KeyCode.UP) {
-                return scene;
-
-
-            }
-            if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.ESCAPE) {
-                //close();
-                return scene;
-            }
-        });
+        return  null;
     }
 
 

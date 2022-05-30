@@ -25,6 +25,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.print.attribute.standard.Media;
+
 public class MenuInicio extends Application {
     private static final Font FONT = Font.font("", FontWeight.BOLD, 30);
     private VBox menuBox;
