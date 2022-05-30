@@ -12,7 +12,7 @@ public class ControladorBola extends Node {
 
     public ControladorBola() {
         this.bola = new Bola();
-        this.velocidadX = - HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
+        this.velocidadX = -HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
         this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
     }
 
@@ -34,14 +34,14 @@ public class ControladorBola extends Node {
         }
     }
 
-    public boolean puntoIA(){
+    public boolean puntoIA() {
         if (bola.getPosicionEjeX() + bola.getRadius() >= HelpTools.WIDTH) {
             return true;
         }
         return false;
     }
 
-    public boolean puntoJugador(){
+    public boolean puntoJugador() {
         if (bola.getPosicionEjeX() - bola.getRadius() <= 0) {
             return true;
         }
@@ -55,38 +55,42 @@ public class ControladorBola extends Node {
             if (this.bola.getPosicionEjeY() >= palaOponente.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaOponente.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaOponente);
-                int velocidadBola = HelpTools.getVelocidadBola();
-                switch (anguloDeRebote) {
-                    case 60:
-                        this.velocidadX = velocidadBola * (0.5);
-                        this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
-                        break;
-                    case 45:
-                        this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
-                        this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
-                        break;
-                    case 30:
-                        this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
-                        this.velocidadY = velocidadBola * (0.5);
-                        break;
-                    case 0:
-                        this.velocidadX = velocidadBola;
-                        this.velocidadY = 0;
-                        break;
-                    case -30:
-                        this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
-                        this.velocidadY = -velocidadBola * (0.5);
-                        break;
-                    case -45:
-                        this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
-                        this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
-                        break;
-                    case -60:
-                        this.velocidadX = velocidadBola * (0.5);
-                        this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
-                        break;
-                }
+                aplicarAnguloPalaIAAVelocidad(anguloDeRebote);
             }
+        }
+    }
+
+    private void aplicarAnguloPalaIAAVelocidad(int anguloDeRebote) {
+        int velocidadBola = HelpTools.getVelocidadBola();
+        switch (anguloDeRebote) {
+            case 60:
+                this.velocidadX = velocidadBola * (0.5);
+                this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
+                break;
+            case 45:
+                this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
+                this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
+                break;
+            case 30:
+                this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
+                this.velocidadY = velocidadBola * (0.5);
+                break;
+            case 0:
+                this.velocidadX = velocidadBola;
+                this.velocidadY = 0;
+                break;
+            case -30:
+                this.velocidadX = velocidadBola * (Math.sqrt(3) / 2);
+                this.velocidadY = -velocidadBola * (0.5);
+                break;
+            case -45:
+                this.velocidadX = velocidadBola * (Math.sqrt(2) / 2);
+                this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
+                break;
+            case -60:
+                this.velocidadX = velocidadBola * (0.5);
+                this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
+                break;
         }
     }
 
@@ -119,38 +123,43 @@ public class ControladorBola extends Node {
             if (this.bola.getPosicionEjeY() >= palaJugador.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaJugador.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaJugador);
-                int velocidadBola = HelpTools.getVelocidadBola();
-                switch (anguloDeRebote) {
-                    case 60:
-                        this.velocidadX = -velocidadBola * (0.5);
-                        this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
-                        break;
-                    case 45:
-                        this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
-                        this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
-                        break;
-                    case 30:
-                        this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
-                        this.velocidadY = velocidadBola * (0.5);
-                        break;
-                    case 0:
-                        this.velocidadX = -velocidadBola;
-                        this.velocidadY = 0;
-                        break;
-                    case -30:
-                        this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
-                        this.velocidadY = -velocidadBola * (0.5);
-                        break;
-                    case -45:
-                        this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
-                        this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
-                        break;
-                    case -60:
-                        this.velocidadX = -velocidadBola * (0.5);
-                        this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
-                        break;
-                }
+                aplicarAnguloJugadorAVelocidad(anguloDeRebote);
+
             }
+        }
+    }
+
+    private void aplicarAnguloJugadorAVelocidad(int anguloDeRebote) {
+        int velocidadBola = HelpTools.getVelocidadBola();
+        switch (anguloDeRebote) {
+            case 60:
+                this.velocidadX = -velocidadBola * (0.5);
+                this.velocidadY = velocidadBola * (Math.sqrt(3) / 2);
+                break;
+            case 45:
+                this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
+                this.velocidadY = velocidadBola * (Math.sqrt(2) / 2);
+                break;
+            case 30:
+                this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
+                this.velocidadY = velocidadBola * (0.5);
+                break;
+            case 0:
+                this.velocidadX = -velocidadBola;
+                this.velocidadY = 0;
+                break;
+            case -30:
+                this.velocidadX = -velocidadBola * (Math.sqrt(3) / 2);
+                this.velocidadY = -velocidadBola * (0.5);
+                break;
+            case -45:
+                this.velocidadX = -velocidadBola * (Math.sqrt(2) / 2);
+                this.velocidadY = -velocidadBola * (Math.sqrt(2) / 2);
+                break;
+            case -60:
+                this.velocidadX = -velocidadBola * (0.5);
+                this.velocidadY = -velocidadBola * (Math.sqrt(3) / 2);
+                break;
         }
     }
 
@@ -197,17 +206,37 @@ public class ControladorBola extends Node {
         bola.setPosicionEjeX(bola.getPosicionEjeX() + velocidadX);
     }
 
-    public void reiniciarBolaPuntoIA(){
+    public void reiniciarBolaPuntoIA() {
         this.bola.setPosicionEjeX(200);
         this.bola.setPosicionEjeY(300);
-        this.velocidadX = HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
-        this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
+        aplicarAnguloPalaIAAVelocidad(getAnguloAleatorio());
     }
 
-    public void reiniciarBolaPuntoJugador(){
+    public void reiniciarBolaPuntoJugador() {
         this.bola.setPosicionEjeX(HelpTools.WIDTH - 200);
         this.bola.setPosicionEjeY(300);
-        this.velocidadX = - HelpTools.getVelocidadBola() * (Math.sqrt(3) / 2);
-        this.velocidadY = HelpTools.getVelocidadBola() * (0.5);
+        aplicarAnguloJugadorAVelocidad(getAnguloAleatorio());
+    }
+
+    private int getAnguloAleatorio() {
+        int random = (int) (Math.random() * 7);
+        switch (random) {
+            case 0:
+                return 60;
+            case 1:
+                return 45;
+            case 2:
+                return 30;
+            case 3:
+                return 0;
+            case 4:
+                return -30;
+            case 5:
+                return -45;
+            case 6:
+                return -60;
+            default:
+                return 0;
+        }
     }
 }
