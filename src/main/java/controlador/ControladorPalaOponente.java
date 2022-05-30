@@ -61,14 +61,14 @@ public class ControladorPalaOponente {
     }
 
     public void mover(Bola bola) {
-        if (bola.getPosicionEjeY() > getCentroPala() + getAlto()/10) {
+        if (bola.getPosicionEjeY() > getCentroPala() + getAlto() / 10) {
             moverAbajo();
-        } else if (bola.getPosicionEjeY() < getCentroPala() - getAlto()/10) {
+        } else if (bola.getPosicionEjeY() < getCentroPala() - getAlto() / 10) {
             moverArriba();
         }
     }
 
-    public void setDificultad(int velocidadBola){
-        this.velocidad = velocidadBola * (2/3);
+    public void setDificultad(int velocidadBola) {
+        this.velocidad = velocidadBola * 2 / 3;
     }
 }

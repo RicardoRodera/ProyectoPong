@@ -51,6 +51,7 @@ public class PartidaControlador  {
 
         this.palaJugador = new ControladorPalaJugador();
         this.controladorPalaOponente = new ControladorPalaOponente();
+        controladorPalaOponente.setDificultad(HelpTools.getVelocidadBola());
         this.bola = new ControladorBola();
         this.marcador = new ControladorMarcador();
         this.scene = crearScenePartida();
