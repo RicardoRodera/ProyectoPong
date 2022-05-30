@@ -33,6 +33,7 @@ public class MenuInicio extends Application {
     private int itemActual = 0;
     private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
     private static Stage escenaInicio;
+    private Scene escena;
 
     private Parent crearContenido() {
         Pane root = new Pane();
@@ -146,7 +147,7 @@ public class MenuInicio extends Application {
 
     public void start(Stage escenaInicio) throws Exception {
         this.escenaInicio = escenaInicio;
-        Scene escena = new Scene(crearContenido());
+        this.escena = new Scene(crearContenido());
         escena.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (itemActual > 0) {
@@ -201,4 +202,7 @@ public class MenuInicio extends Application {
         escenaInicio.setScene(scene);
     }
 
+    public Scene getEscena() {
+        return escena;
+    }
 }
