@@ -2,7 +2,7 @@ package modelo;
 
 public enum Dificultad {
 
-    EASY(3), MEDIUM(6), HARD(8);
+    EASY(4), MEDIUM(6), HARD(8);
     private int velocidad;
 
 
