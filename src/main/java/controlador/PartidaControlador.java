@@ -162,8 +162,12 @@ public class PartidaControlador  {
                         controladorPalaOponente.resetearPala();
                     }
 
-                    if(marcador.finalPartida()){
-                        finalizar();
+                    if(marcador.ganadorIA()){
+                        finalizar(false);
+                    }
+
+                    if(marcador.ganadorJugador()){
+                        finalizar(true);
                     }
                 })
 
@@ -214,9 +218,9 @@ public class PartidaControlador  {
 
     }
 
-    private void finalizar(){
+    private void finalizar(boolean ganador){
         movimientoBola.stop();
-        EscenaFin escenaFin = new EscenaFin();
+        EscenaFin escenaFin = new EscenaFin(ganador);
         MenuInicio.setScene(escenaFin.getEscena());
     }
 

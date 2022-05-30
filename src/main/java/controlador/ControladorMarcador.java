@@ -40,13 +40,22 @@ public class ControladorMarcador {
         marcador.anotarPuntoJugador(puntosJugador);
     }
 
-    public boolean finalPartida(){
-        if(puntosIA == 10 || puntosJugador == 10){
+    public boolean ganadorIA(){
+        if(puntosIA == 10){
             return true;
         }
 
         return false;
     }
+
+    public boolean ganadorJugador(){
+        if( puntosJugador == 10){
+            return true;
+        }
+
+        return false;
+    }
+
 
     public void setPuntosJugador(int puntosJugador) {
         this.puntosJugador = puntosJugador;
