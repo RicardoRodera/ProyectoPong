@@ -74,8 +74,8 @@ public class PartidaControlador  {
         textoSalir.setTranslateX(30);
         textoSalir.setTranslateY(570);
         textoSalir.setFill(HelpTools.COLOR_ITEMS);
-        textoSalir.setFont(Font.font("", FontWeight.BOLD, 15));
-        textoSalir.setOpacity(0.2);
+        textoSalir.setFont(Font.font("", FontWeight.BOLD, 17));
+        textoSalir.setOpacity(0.5);
 
         pane.getChildren().addAll(bg, textoReanudar, textoSalir);
         return pane;
@@ -209,7 +209,9 @@ public class PartidaControlador  {
             }
 
         } else if(ESCAPE.equals(event)){
-            System.exit(0);
+            if(pausa) {
+                MenuInicio.reiniciar();
+            }
         }
 
     }
