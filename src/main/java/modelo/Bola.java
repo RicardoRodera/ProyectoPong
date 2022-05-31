@@ -1,28 +1,32 @@
 package modelo;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
-public class Bola extends Circle {
-    private static final double RADIO = 10;
+public class Bola extends Rectangle {
+    private static final double LADO = 20;
 
+    public double getLado(){
+        return LADO;
+    }
     public Bola() {
-        super(300, 300, RADIO, HelpTools.COLOR_ITEMS);
+        super(300, 300, LADO, LADO);
+        super.setFill(HelpTools.COLOR_ITEMS);
     }
 
     public double getPosicionEjeX() {
-        return super.getCenterX();
+        return super.getX();
     }
 
     public void setPosicionEjeX(double posicionEjeX) {
-        super.setCenterX(posicionEjeX);
+        super.setX(posicionEjeX);
     }
 
     public double getPosicionEjeY() {
-        return super.getCenterY();
+        return super.getY();
     }
 
     public void setPosicionEjeY(double posicionEjeY) {
-        super.setCenterY(posicionEjeY);
+        super.setY(posicionEjeY);
     }
 }

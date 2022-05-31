@@ -21,28 +21,17 @@ public class ControladorBola extends Node {
         manejarChoqueSuelo();
         manejarChoquePalaJugador(palaJugador);
         manejarChoquePalaIA(palaOponente);
-        manejarChoqueParedes();
-    }
-
-    private void manejarChoqueParedes() {
-        if (bola.getPosicionEjeX() + bola.getRadius() >= HelpTools.WIDTH) {
-            this.velocidadX *= -1;
-        }
-
-        if (bola.getPosicionEjeX() - bola.getRadius() <= 0) {
-            this.velocidadX *= -1;
-        }
     }
 
     public boolean puntoIA() {
-        if (bola.getPosicionEjeX() + bola.getRadius() >= HelpTools.WIDTH) {
+        if (bola.getPosicionEjeX() + bola.getLado() >= HelpTools.WIDTH) {
             return true;
         }
         return false;
     }
 
     public boolean puntoJugador() {
-        if (bola.getPosicionEjeX() - bola.getRadius() <= 0) {
+        if (bola.getPosicionEjeX() <= 0) {
             return true;
         }
         return false;
@@ -50,9 +39,9 @@ public class ControladorBola extends Node {
 
 
     private void manejarChoquePalaIA(ControladorPalaOponente palaOponente) {
-        if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaOponente.getRectangulo().getX()
-                && this.bola.getPosicionEjeX() - bola.getRadius() <= palaOponente.getRectangulo().getX() + palaOponente.getAncho()) {
-            if (this.bola.getPosicionEjeY() >= palaOponente.getTopPala() &&
+        if (this.bola.getPosicionEjeX() <= palaOponente.getRectangulo().getX() + palaOponente.getAncho()
+                && this.bola.getPosicionEjeX() >= palaOponente.getRectangulo().getX() + palaOponente.getAncho()/2) {
+            if (this.bola.getPosicionEjeY() + bola.getLado() >= palaOponente.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaOponente.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaOponente);
                 aplicarAnguloPalaIAAVelocidad(anguloDeRebote);
@@ -118,9 +107,9 @@ public class ControladorBola extends Node {
 
 
     private void manejarChoquePalaJugador(ControladorPalaJugador palaJugador) {
-        if (this.bola.getPosicionEjeX() + bola.getRadius() >= palaJugador.getRectangulo().getX()
-                && this.bola.getPosicionEjeX() - bola.getRadius() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()) {
-            if (this.bola.getPosicionEjeY() >= palaJugador.getTopPala() &&
+        if (this.bola.getPosicionEjeX() + bola.getLado() >= palaJugador.getRectangulo().getX()
+                && this.bola.getPosicionEjeX() - bola.getLado() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()/2) {
+            if (this.bola.getPosicionEjeY() + bola.getLado() >= palaJugador.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaJugador.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaJugador);
                 aplicarAnguloJugadorAVelocidad(anguloDeRebote);
@@ -186,13 +175,13 @@ public class ControladorBola extends Node {
     }
 
     private void manejarChoqueSuelo() {
-        if (bola.getPosicionEjeY() + bola.getRadius() >= HelpTools.HEIGHT) {
+        if (bola.getPosicionEjeY() + bola.getLado() >= HelpTools.HEIGHT) {
             this.velocidadY = Math.abs(this.velocidadY);
         }
     }
 
     private void manejarChoqueTecho() {
-        if (bola.getPosicionEjeY() - bola.getRadius() <= 0) {
+        if (bola.getPosicionEjeY() <= 0) {
             this.velocidadY = -1 * Math.abs(this.velocidadY);
         }
     }
