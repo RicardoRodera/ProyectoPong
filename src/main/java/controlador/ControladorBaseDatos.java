@@ -13,24 +13,20 @@ public class ControladorBaseDatos {
     private final String USUARIO = "pong";
     private final String PASSWORD = "1551";
     private Connection conexion;
-    public ControladorBaseDatos() {
-        this.conexion = conexion();
+    public ControladorBaseDatos() throws SQLException, ClassNotFoundException {
+        conexion();
     }
 
-    private Connection conexion() {
-        try {
+    private void conexion() throws ClassNotFoundException, SQLException {
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(RUTA
                     ,USUARIO,PASSWORD);
                     System.out.println("Exito en la conexion");
-                    return conexion;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                    this.conexion = conexion;
 
-            return null;
+
+
     }
 
     public DatosRanking leerDatosRanking(String nivelParametro) throws SQLException {

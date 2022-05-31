@@ -68,7 +68,11 @@ private int puntuacion;
         layout.getChildren().add(newGame);
         layout.getChildren().add(quitGame);
         try {
-            layout.getChildren().add(historico());
+            try {
+                layout.getChildren().add(historico());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -158,7 +162,7 @@ private int puntuacion;
     }
 
 
-    private VBox historico() throws SQLException {
+    private VBox historico() throws SQLException, ClassNotFoundException {
         ControladorBaseDatos controladorBaseDatos = new ControladorBaseDatos();
         VBox contenido = new VBox();
         DatosRanking datosRanking =  controladorBaseDatos.leerDatosRanking(dificultad());

@@ -248,8 +248,15 @@ public class ControladorPartida {
         }
 
         if(puntos > 0){
-            ControladorBaseDatos controladorBaseDatos = new ControladorBaseDatos();
-            controladorBaseDatos.grabarPartida(nivel, puntos, duracion, puntuacion);
+
+            ControladorBaseDatos controladorBaseDatos = null;
+            try {
+                controladorBaseDatos = new ControladorBaseDatos();
+                controladorBaseDatos.grabarPartida(nivel, puntos, duracion, puntuacion);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
 
 
