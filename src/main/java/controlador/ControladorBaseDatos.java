@@ -16,7 +16,7 @@ public class ControladorBaseDatos {
     public ControladorBaseDatos() throws SQLException, ClassNotFoundException {
         conexion();
     }
-
+//Prueba
     private void conexion() throws ClassNotFoundException, SQLException {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
