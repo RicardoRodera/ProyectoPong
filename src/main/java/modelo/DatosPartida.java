@@ -44,13 +44,19 @@ public class DatosPartida {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("DatosPartida{");
-        sb.append(", fecha=").append(fecha);
-        sb.append(", nivel='").append(nivel).append('\'');
-        sb.append(", puntosEncajados=").append(puntosEncajados);
-        sb.append(", duracion=").append(duracion);
-        sb.append(", puntuacion=").append(puntuacion);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(fecha);
+        sb.append("\t\t");
+        sb.append(nivel.toUpperCase());
+        sb.append("\t\t");
+        sb.append(puntosEncajados);
+        sb.append("\t\t  ");
+        sb.append(duracion);
+        sb.append("\t\t\t");
+        sb.append(puntuacion);
+        sb.append("\n");
+
         return sb.toString();
     }
 }

@@ -2,6 +2,7 @@
 
 
 package modelo;
+import controlador.ControladorBaseDatos;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -32,18 +33,24 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 public class EscenaFin{
 
 Scene escena;
 boolean victoriaJugador;
+private DatosPartida ultimaPartida;
 
-
-    public EscenaFin(boolean victoriaJugador) {
+    public EscenaFin(boolean victoriaJugador, DatosPartida datosPartida) {
         this.escena = EndScene();
         this.victoriaJugador = victoriaJugador;
+        this.ultimaPartida = datosPartida;
     }
 
+    public void setUltimaPartida(DatosPartida ultimaPartida) {
+        this.ultimaPartida = ultimaPartida;
+
+    }
 
     public Scene EndScene() {
 
@@ -63,6 +70,12 @@ boolean victoriaJugador;
 
         layout.getChildren().add(newGame);
         layout.getChildren().add(quitGame);
+        try {
+            layout.getChildren().add(historico());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //layout.getChildren().add(ultimaPartida());
         layout.setBackground(new Background(new BackgroundFill(HelpTools.COLOR_FONDO, CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(layout, HelpTools.WIDTH, HelpTools.HEIGHT);
 
@@ -145,6 +158,41 @@ boolean victoriaJugador;
 
     public Scene getEscena() {
         return escena;
+    }
+
+
+    private VBox historico() throws SQLException {
+        ControladorBaseDatos controladorBaseDatos = new ControladorBaseDatos();
+        VBox contenido = new VBox();
+        DatosRanking datosRanking =  controladorBaseDatos.leerDatosRanking(dificultad());
+        String historico = datosRanking.toString();
+        Text base = new Text(historico);
+        base.setFill(HelpTools.COLOR_ITEMS);
+        contenido.getChildren().add(base);
+        contenido.setLayoutX(300);
+        contenido.setLayoutY(200);
+        return contenido;
+    }
+
+    private HBox ultimaPartida(){
+        HBox contenido = new HBox();
+        Text texto = new Text(ultimaPartida.toString());
+        texto.setFill(HelpTools.COLOR_ITEMS);
+        contenido.getChildren().add(texto);
+        contenido.setLayoutX(300);
+        contenido.setLayoutY(400);
+
+        return contenido;
+    }
+
+    private String dificultad(){
+        if(HelpTools.getVelocidadBola() == 4){
+            return  "EASY";
+        }else if(HelpTools.getVelocidadBola() == 6){
+            return  "MEDIUM";
+        }else {
+            return  "HARD";
+        }
     }
 }
 

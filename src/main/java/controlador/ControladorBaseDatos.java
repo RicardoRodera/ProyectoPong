@@ -30,11 +30,12 @@ public class ControladorBaseDatos {
             return null;
     }
 
-    public void leerDatosRanking(String nivelParametro) throws SQLException {
+    public DatosRanking leerDatosRanking(String nivelParametro) throws SQLException {
         Statement consulta = conexion.createStatement();
         String sentencia = generarConsulta(nivelParametro);
         ResultSet resultado = consulta.executeQuery(sentencia);
         DatosRanking datosRanking = new DatosRanking();
+        int contador = 0;
         while(resultado.next()){
             Date fechaYHora = resultado.getDate("fechayhora");
             String nivel = resultado.getString("nivel");
@@ -45,10 +46,15 @@ public class ControladorBaseDatos {
             DatosPartida partida = new DatosPartida(fechaYHora, nivel, puntosEncajados, duracion, puntuacion);
 
             datosRanking.anadirPartida(partida);
+            contador++;
+            if(contador == 5){
+                break;
+            }
         }
-        System.out.println( datosRanking.toString());
         resultado.close();
         consulta.close();
+        return datosRanking;
+
 
     }
 

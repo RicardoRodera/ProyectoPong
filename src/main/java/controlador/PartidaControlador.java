@@ -19,6 +19,10 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.*;
 
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+
 import static javafx.scene.input.KeyCode.*;
 
 
@@ -31,12 +35,12 @@ public class PartidaControlador  {
     private Pane root;
     private Pane panePausa;
     private ControladorMarcador marcador;
-    boolean palaMoviendoseArriba = false;
-    boolean palaMoviendoseAbajo = false;
-    boolean pausa = false;
-
+    private boolean palaMoviendoseArriba = false;
+    private boolean palaMoviendoseAbajo = false;
+    private boolean pausa = false;
+    private double ciclos;
     Timeline movimientoBola = null;
-
+    private DatosPartida datosPartida;
     public Scene getScene() {
         return scene;
     }
@@ -54,7 +58,7 @@ public class PartidaControlador  {
         this.marcador = new ControladorMarcador();
         this.scene = crearScenePartida();
         this.panePausa = crearPanePausa();
-
+        this.ciclos = 0;
     }
 
     private Pane crearPanePausa() {
@@ -123,7 +127,7 @@ public class PartidaControlador  {
         final double DURACION_SEGUNDOS = 0.017;
         movimientoBola = new Timeline(
                 new KeyFrame(Duration.seconds(DURACION_SEGUNDOS), (ActionEvent ae) ->{
-
+                    this.ciclos++;
                     bola.mover();
                     bola.manejarChoques(palaJugador, controladorPalaOponente);
 
@@ -222,8 +226,39 @@ public class PartidaControlador  {
 
     private void finalizar(boolean ganador){
         movimientoBola.stop();
-        EscenaFin escenaFin = new EscenaFin(ganador);
+        try {
+          grabarPartida();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        EscenaFin escenaFin = new EscenaFin(ganador, datosPartida);
         MenuInicio.setScene(escenaFin.getEscena());
     }
+
+    private void grabarPartida() throws SQLException {
+        String nivel;
+        int puntos = marcador.getPuntosJugador() - marcador.getPuntosIA();
+        int duracion = (int) (ciclos / 60);
+        int puntuacion = (puntos * 100) - duracion;
+
+
+
+
+        if(HelpTools.getVelocidadBola() == 4){
+            nivel = "EASY";
+        }else if(HelpTools.getVelocidadBola() == 6){
+            nivel = "MEDIUM";
+        }else {
+            nivel = "HARD";
+        }
+
+        if(puntos > 0){
+            ControladorBaseDatos controladorBaseDatos = new ControladorBaseDatos();
+            controladorBaseDatos.grabarPartida(nivel, puntos, duracion, puntuacion);
+        }
+        this.datosPartida = new DatosPartida(Date.valueOf(LocalDate.now()),nivel, puntos, duracion, puntuacion);
+
+    }
+
 
 }
