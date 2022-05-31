@@ -47,7 +47,7 @@ public class DatosPartida {
         final StringBuilder sb = new StringBuilder();
 
         sb.append(fecha);
-        sb.append("\t\t");
+        sb.append("\t\t ");
         sb.append(nivel.toUpperCase());
         sb.append("\t\t");
         sb.append(puntosEncajados);

@@ -40,7 +40,7 @@ public class PartidaControlador  {
     private boolean pausa = false;
     private double ciclos;
     Timeline movimientoBola = null;
-    private DatosPartida datosPartida;
+    private int datosPartida;
     public Scene getScene() {
         return scene;
     }
@@ -240,7 +240,7 @@ public class PartidaControlador  {
         int puntos = marcador.getPuntosJugador() - marcador.getPuntosIA();
         int duracion = (int) (ciclos / 60);
         int puntuacion = (puntos * 100) - duracion;
-
+        this.datosPartida =  puntuacion;
 
 
 
@@ -256,9 +256,11 @@ public class PartidaControlador  {
             ControladorBaseDatos controladorBaseDatos = new ControladorBaseDatos();
             controladorBaseDatos.grabarPartida(nivel, puntos, duracion, puntuacion);
         }
-        this.datosPartida = new DatosPartida(Date.valueOf(LocalDate.now()),nivel, puntos, duracion, puntuacion);
+
 
     }
+
+
 
 
 }

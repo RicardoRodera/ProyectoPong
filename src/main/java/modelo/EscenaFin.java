@@ -39,18 +39,15 @@ public class EscenaFin{
 
 Scene escena;
 boolean victoriaJugador;
-private DatosPartida ultimaPartida;
+private int puntuacion;
 
-    public EscenaFin(boolean victoriaJugador, DatosPartida datosPartida) {
+    public EscenaFin(boolean victoriaJugador, int datosPartida) {
+        this.puntuacion = datosPartida;
         this.escena = EndScene();
         this.victoriaJugador = victoriaJugador;
-        this.ultimaPartida = datosPartida;
-    }
-
-    public void setUltimaPartida(DatosPartida ultimaPartida) {
-        this.ultimaPartida = ultimaPartida;
 
     }
+
 
     public Scene EndScene() {
 
@@ -75,7 +72,7 @@ private DatosPartida ultimaPartida;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //layout.getChildren().add(ultimaPartida());
+        layout.getChildren().add(ultimaPartida());
         layout.setBackground(new Background(new BackgroundFill(HelpTools.COLOR_FONDO, CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(layout, HelpTools.WIDTH, HelpTools.HEIGHT);
 
@@ -176,11 +173,11 @@ private DatosPartida ultimaPartida;
 
     private HBox ultimaPartida(){
         HBox contenido = new HBox();
-        Text texto = new Text(ultimaPartida.toString());
+        Text texto = new Text(puntuacionString());
         texto.setFill(HelpTools.COLOR_ITEMS);
         contenido.getChildren().add(texto);
         contenido.setLayoutX(300);
-        contenido.setLayoutY(400);
+        contenido.setLayoutY(300);
 
         return contenido;
     }
@@ -193,6 +190,16 @@ private DatosPartida ultimaPartida;
         }else {
             return  "HARD";
         }
+    }
+
+    private String puntuacionString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("PUNTUACION\t");
+        sb.append(this.puntuacion);
+        System.out.println(this.puntuacion);
+        return sb.toString();
+
     }
 }
 

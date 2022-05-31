@@ -23,7 +23,7 @@ public class DatosRanking {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("\tFECHA  \t    NIVEL\t PUNTOS \tTIEMPO\t PUNTUACION FINAL\n");
+        sb.append("\tFECHA  \t  \t  NIVEL\t PUNTOS \tTIEMPO\t PUNTUACION FINAL\n");
         for(DatosPartida datosPartida: lista){
             sb.append(datosPartida.toString());
         }
