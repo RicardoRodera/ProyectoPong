@@ -4,15 +4,15 @@ import java.sql.Date;
 
 public class DatosPartida {
 
-    private String jugador;
+
     private Date fecha;
     private String nivel;
     private int puntosEncajados;
     private int duracion;
     private int puntuacion;
 
-    public DatosPartida(String jugador, Date fecha, String nivel, int puntosEncajados, int duracion, int puntuacion) {
-        this.jugador = jugador;
+    public DatosPartida( Date fecha, String nivel, int puntosEncajados, int duracion, int puntuacion) {
+
         this.fecha = fecha;
         this.nivel = nivel;
         this.puntosEncajados = puntosEncajados;
@@ -20,9 +20,7 @@ public class DatosPartida {
         this.puntuacion = puntuacion;
     }
 
-    public String getJugador() {
-        return jugador;
-    }
+
 
     public Date getFecha() {
         return fecha;
@@ -47,7 +45,6 @@ public class DatosPartida {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DatosPartida{");
-        sb.append("jugador='").append(jugador).append('\'');
         sb.append(", fecha=").append(fecha);
         sb.append(", nivel='").append(nivel).append('\'');
         sb.append(", puntosEncajados=").append(puntosEncajados);

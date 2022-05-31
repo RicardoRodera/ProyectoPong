@@ -30,19 +30,19 @@ public class ControladorBaseDatos {
             return null;
     }
 
-    public void leerDatosRankingEasy() throws SQLException {
+    public void leerDatosRanking(String nivelParametro) throws SQLException {
         Statement consulta = conexion.createStatement();
-        ResultSet resultado = consulta.executeQuery("SELECT * FROM rankingeasy");
+        String sentencia = generarConsulta(nivelParametro);
+        ResultSet resultado = consulta.executeQuery(sentencia);
         DatosRanking datosRanking = new DatosRanking();
         while(resultado.next()){
-            String jugador = resultado.getString("jugador");
             Date fechaYHora = resultado.getDate("fechayhora");
             String nivel = resultado.getString("nivel");
             int puntosEncajados = resultado.getInt("puntosencajados");
             int duracion = resultado.getInt("duracion");
             int puntuacion = resultado.getInt("puntuacion");
 
-            DatosPartida partida = new DatosPartida(jugador, fechaYHora, nivel, puntosEncajados, duracion, puntuacion);
+            DatosPartida partida = new DatosPartida(fechaYHora, nivel, puntosEncajados, duracion, puntuacion);
 
             datosRanking.anadirPartida(partida);
         }
@@ -52,10 +52,45 @@ public class ControladorBaseDatos {
 
     }
 
-    public void grabarPartida(String jugador, Date fechaYHora, String nivel, int puntosEncajados, int duracion, int puntuacion) throws SQLException {
+    private String generarConsulta(String nivelParametro){
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM ");
+
+        switch (nivelParametro){
+            case "EASY": sb.append("rankingeasy");
+                break;
+            case "MEDIUM": sb.append("rankingmedium");
+                break;
+            case "HARD": sb.append("rankinghard");
+                break;
+        }
+
+
+        return sb.toString();
+    }
+
+    public void grabarPartida( String nivel, int puntosEncajados, int duracion, int puntuacion) throws SQLException {
         Statement consulta = conexion.createStatement();
-        String insertar ="INSERT INTO partida VALUES ( " + jugador + fechaYHora  + nivel + puntosEncajados + duracion + puntuacion + " )";
+        String insertar = generarInsert( nivel,puntosEncajados, duracion, puntuacion);
+        System.out.println(insertar);
         consulta.executeUpdate(insertar);
+        consulta.close();
+    }
+
+    private String generarInsert(String nivel, int puntosEncajados, int duracion, int puntuacion){
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO partida (nivel, puntosencajados, duracion, puntuacion) VALUES ( '");
+        sb.append(nivel);
+        sb.append("', ");
+        sb.append(puntosEncajados);
+        sb.append(", ");
+        sb.append(duracion);
+        sb.append(", ");
+        sb.append(puntuacion);
+        sb.append(");");
+        return sb.toString();
+
+
     }
 
 }
