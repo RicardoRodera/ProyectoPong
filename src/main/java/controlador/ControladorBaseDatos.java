@@ -5,6 +5,9 @@ import modelo.DatosRanking;
 
 import java.sql.*;
 
+/**
+ * Esta clase controla la base de datos
+ */
 public class ControladorBaseDatos {
     private final String RUTA = "jdbc:mysql://localhost/proyecto_pong";
     private final String USUARIO = "pong";

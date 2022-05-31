@@ -3,14 +3,9 @@ package controlador;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -19,14 +14,12 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.*;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import static javafx.scene.input.KeyCode.*;
 
 
-public class PartidaControlador  {
+public class ControladorPartida {
 
     private ControladorPalaJugador palaJugador;
     private ControladorPalaOponente controladorPalaOponente;
@@ -39,7 +32,7 @@ public class PartidaControlador  {
     private boolean palaMoviendoseAbajo = false;
     private boolean pausa = false;
     private double ciclos;
-    Timeline movimientoBola = null;
+    private Timeline movimientoBola = null;
     private int datosPartida;
     public Scene getScene() {
         return scene;
@@ -49,7 +42,7 @@ public class PartidaControlador  {
         this.scene = scene;
     }
 
-    public PartidaControlador() {
+    public ControladorPartida() {
 
         this.palaJugador = new ControladorPalaJugador();
         this.controladorPalaOponente = new ControladorPalaOponente();
@@ -230,9 +223,11 @@ public class PartidaControlador  {
           grabarPartida();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            EscenaFin escenaFin = new EscenaFin(ganador, datosPartida);
+            MenuInicio.setScene(escenaFin.getEscena());
         }
-        EscenaFin escenaFin = new EscenaFin(ganador, datosPartida);
-        MenuInicio.setScene(escenaFin.getEscena());
+
     }
 
     private void grabarPartida() throws SQLException {

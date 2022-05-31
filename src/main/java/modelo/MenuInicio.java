@@ -3,7 +3,7 @@ package modelo;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import controlador.PartidaControlador;
+import controlador.ControladorPartida;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -24,8 +24,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import javax.print.attribute.standard.Media;
 
 public class MenuInicio extends Application {
     private static final Font FONT = Font.font("", FontWeight.BOLD, 30);
@@ -193,15 +191,22 @@ public class MenuInicio extends Application {
                 break;
         }
 
-        PartidaControlador partidaControlador = new PartidaControlador();
+        ControladorPartida partidaControlador = new ControladorPartida();
         setScene(partidaControlador.getScene());
 
     }
 
+    /**
+     * Este metodo permite cambiar la escena
+     * @param scene La escena que se muestra
+     */
     public static void setScene(Scene scene){
         escenaInicio.setScene(scene);
     }
 
+    /**
+     * Este metodo permite volver a  la pantalla de inicio
+     */
     public static void reiniciar() {
         escenaInicio.setScene(escena);
     }
