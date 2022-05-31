@@ -106,7 +106,7 @@ boolean victoriaJugador;
         letras.setAlignment(Pos.CENTER);
         for (int i = 0; i < header.length(); i++) {
             Text letra = new Text(header.charAt(i) + "");
-            letra.setFont(Font.font("", FontWeight.BOLD, 100));
+            letra.setFont(Font.font("", FontWeight.BOLD, 150));
             letra.setFill(Color.WHITE);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
