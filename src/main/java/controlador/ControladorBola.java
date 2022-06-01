@@ -40,7 +40,7 @@ public class ControladorBola extends Node {
 
     private void manejarChoquePalaIA(ControladorPalaOponente palaOponente) {
         if (this.bola.getPosicionEjeX() <= palaOponente.getRectangulo().getX() + palaOponente.getAncho()
-                && this.bola.getPosicionEjeX() >= palaOponente.getRectangulo().getX() + palaOponente.getAncho()/2) {
+                && this.bola.getPosicionEjeX() + bola.getLado() >= palaOponente.getRectangulo().getX()) {
             if (this.bola.getPosicionEjeY() + bola.getLado() >= palaOponente.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaOponente.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaOponente);
@@ -108,7 +108,7 @@ public class ControladorBola extends Node {
 
     private void manejarChoquePalaJugador(ControladorPalaJugador palaJugador) {
         if (this.bola.getPosicionEjeX() + bola.getLado() >= palaJugador.getRectangulo().getX()
-                && this.bola.getPosicionEjeX() - bola.getLado() <= palaJugador.getRectangulo().getX() + palaJugador.getAncho()/2) {
+                && this.bola.getPosicionEjeX() - bola.getLado() <= palaJugador.getRectangulo().getX()) {
             if (this.bola.getPosicionEjeY() + bola.getLado() >= palaJugador.getTopPala() &&
                     this.bola.getPosicionEjeY() <= palaJugador.getBottomPala()) {
                 int anguloDeRebote = calcularAngulo(palaJugador);
@@ -153,7 +153,7 @@ public class ControladorBola extends Node {
     }
 
     private int calcularAngulo(ControladorPalaJugador palaJugador) {
-        double diferencia = bola.getPosicionEjeY() - palaJugador.getTopPala();
+        double diferencia = bola.getPosicionEjeY() + bola.getLado()/2 - palaJugador.getTopPala();
         int angulo = 0;
         if (diferencia < palaJugador.getAlto() / 7) {
             angulo = 60;
@@ -167,7 +167,7 @@ public class ControladorBola extends Node {
             angulo = -30;
         } else if (diferencia < palaJugador.getAlto() * 6 / 7) {
             angulo = -45;
-        } else if (diferencia <= palaJugador.getAlto()) {
+        } else {
             angulo = -60;
         }
 
