@@ -4,69 +4,67 @@
 package modelo;
 import controlador.ControladorBaseDatos;
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class EscenaFin{
 
 Scene escena;
 boolean victoriaJugador;
+private ScheduledExecutorService bgThread = Executors.newSingleThreadScheduledExecutor();
 private int puntuacion;
+private VBox menuFinBox;
+private int itemActual = 0;
+private Stage escenaFin;
 
     public EscenaFin(boolean victoriaJugador, int datosPartida) {
         this.puntuacion = datosPartida;
-        this.escena = EndScene();
+        this.escena = endScene();
         this.victoriaJugador = victoriaJugador;
 
     }
 
+    private MenuInicio.MenuItem getMenuItem(int index) {
+        return (MenuInicio.MenuItem)menuFinBox.getChildren().get(index);
+    }
 
-    public Scene EndScene() {
+    public Scene endScene() {
 
         crearTexto(victoriaJugador);
         Pane layout = new Pane();
-        Text newGame = new Text();
-        Text quitGame = new Text();
-
-        newGame.setText("U: Nueva Partida");
-        newGame.setFont(Font.font("impact", FontWeight.NORMAL, FontPosture.REGULAR, 15));
-        newGame.setFill(HelpTools.COLOR_ITEMS);
-
-        quitGame.setText("D: Salir de la aplicación");
-        quitGame.setFont(Font.font("impact", FontWeight.NORMAL, FontPosture.REGULAR, 15));
-        quitGame.setFill(HelpTools.COLOR_ITEMS);
 
 
-        layout.getChildren().add(newGame);
-        layout.getChildren().add(quitGame);
+        MenuInicio.MenuItem itemExit = new MenuInicio.MenuItem("EXIT");
+        itemExit.setOnActivate(() -> System.exit(0));
+
+        menuFinBox = new VBox(10,
+                new MenuInicio.MenuItem("PLAY AGAIN"),
+                itemExit);
+        menuFinBox.setAlignment(Pos.TOP_CENTER);
+        menuFinBox.setTranslateX(360);
+        menuFinBox.setTranslateY(400);
+
+        getMenuItem(0).setActive(true);
+
+        layout.getChildren().add(menuFinBox);
+
         try {
             try {
                 layout.getChildren().add(historico());
@@ -81,27 +79,58 @@ private int puntuacion;
         Scene scene = new Scene(layout, HelpTools.WIDTH, HelpTools.HEIGHT);
 
         scene.setCursor(Cursor.DISAPPEAR);
-        quitGame.setLayoutX(350);
-        newGame.setLayoutX(350);
-        newGame.setLayoutY(400);
-        quitGame.setLayoutY(450);
+
         layout.getChildren().add(crearTexto(victoriaJugador));
         crearTexto(victoriaJugador).setLayoutX(300);
         crearTexto(victoriaJugador).setLayoutY(50);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent tocaTecla) -> {
             if(tocaTecla.getCode() == KeyCode.UP){
-            MenuInicio.reiniciar();
+            //MenuInicio.reiniciar();
 
             }
             if(tocaTecla.getCode() == KeyCode.DOWN){
-                Platform.exit();
+                //Platform.exit();
+            }
+            if(tocaTecla.getCode() == KeyCode.ENTER){
+                getMenuItem(itemActual).activate();
             }
         });
 
         return scene;
 
     }
+
+    public void start(Stage escenaFin) throws Exception {
+        this.escenaFin = escenaFin;
+        this.escena = endScene();
+        escena.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP) {
+                if (itemActual > 0) {
+                    getMenuItem(itemActual).setActive(false);
+                    getMenuItem(--itemActual).setActive(true);
+                }
+            }
+
+            if (event.getCode() == KeyCode.DOWN) {
+                if (itemActual < menuFinBox.getChildren().size() - 1) {
+                    getMenuItem(itemActual).setActive(false);
+                    getMenuItem(++itemActual).setActive(true);
+                }
+            }
+
+            if (event.getCode() == KeyCode.ENTER) {
+                getMenuItem(itemActual).activate();
+            }
+        });
+
+        escenaFin.setScene(escena);
+        escenaFin.setOnCloseRequest(event -> {
+            bgThread.shutdownNow();
+        });
+        escenaFin.show();
+    }
+
 
 
 

@@ -109,7 +109,7 @@ public class MenuInicio extends Application {
         }
     }
 
-    private static class MenuItem extends HBox {
+    public static class MenuItem extends HBox {
         private Text texto;
         private Runnable script;
 
