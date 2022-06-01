@@ -9,14 +9,14 @@ import java.sql.*;
  * Esta clase controla la base de datos
  */
 public class ControladorBaseDatos {
-    private final String RUTA = "jdbc:mysql://localhost/proyecto_pong";
+    private final String RUTA = "jdbc:mysql://83.54.213.34/proyecto_pong";
     private final String USUARIO = "pong";
     private final String PASSWORD = "1551";
     private Connection conexion;
     public ControladorBaseDatos() throws SQLException, ClassNotFoundException {
         conexion();
     }
-//Prueba
+
     private void conexion() throws ClassNotFoundException, SQLException {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
