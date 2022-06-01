@@ -3,6 +3,7 @@ module com.example.pong {
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
+    requires javafx.media;
 
 
     opens com.example.pong to javafx.fxml;
