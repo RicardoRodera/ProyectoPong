@@ -59,7 +59,7 @@ private Stage escenaFin;
                 itemExit);
         menuFinBox.setAlignment(Pos.TOP_CENTER);
         menuFinBox.setTranslateX(360);
-        menuFinBox.setTranslateY(400);
+        menuFinBox.setTranslateY(450);
 
         getMenuItem(0).setActive(true);
 
@@ -85,14 +85,21 @@ private Stage escenaFin;
         crearTexto(victoriaJugador).setLayoutY(50);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent tocaTecla) -> {
-            if(tocaTecla.getCode() == KeyCode.UP){
-            //MenuInicio.reiniciar();
+            if (tocaTecla.getCode() == KeyCode.UP) {
+                if (itemActual > 0) {
+                    getMenuItem(itemActual).setActive(false);
+                    getMenuItem(--itemActual).setActive(true);
+                }
+            }
 
+            if (tocaTecla.getCode() == KeyCode.DOWN) {
+                if (itemActual < menuFinBox.getChildren().size() - 1) {
+                    getMenuItem(itemActual).setActive(false);
+                    getMenuItem(++itemActual).setActive(true);
+                }
             }
-            if(tocaTecla.getCode() == KeyCode.DOWN){
-                //Platform.exit();
-            }
-            if(tocaTecla.getCode() == KeyCode.ENTER){
+
+            if (tocaTecla.getCode() == KeyCode.ENTER) {
                 getMenuItem(itemActual).activate();
             }
         });
@@ -101,47 +108,6 @@ private Stage escenaFin;
 
     }
 
-    public void start(Stage escenaFin) throws Exception {
-        this.escenaFin = escenaFin;
-        this.escena = endScene();
-        escena.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
-                if (itemActual > 0) {
-                    getMenuItem(itemActual).setActive(false);
-                    getMenuItem(--itemActual).setActive(true);
-                }
-            }
-
-            if (event.getCode() == KeyCode.DOWN) {
-                if (itemActual < menuFinBox.getChildren().size() - 1) {
-                    getMenuItem(itemActual).setActive(false);
-                    getMenuItem(++itemActual).setActive(true);
-                }
-            }
-
-            if (event.getCode() == KeyCode.ENTER) {
-                getMenuItem(itemActual).activate();
-            }
-        });
-
-        escenaFin.setScene(escena);
-        escenaFin.setOnCloseRequest(event -> {
-            bgThread.shutdownNow();
-        });
-        escenaFin.show();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
     private Node crearTexto(boolean victoriaJugador) {
         if(!victoriaJugador){
         String header = "GAME OVER";
@@ -149,7 +115,8 @@ private Stage escenaFin;
         letras.setAlignment(Pos.CENTER);
         for (int i = 0; i < header.length(); i++) {
             Text letra = new Text(header.charAt(i) + "");
-            letra.setFont(Font.font("", FontWeight.BOLD, 150));
+            letra.setFont(Font.font("", FontWeight.BOLD, 125));
+            letras.setLayoutX(80);
             letra.setFill(Color.WHITE);
             letra.setOpacity(0);
             letras.getChildren().add(letra);
@@ -198,8 +165,9 @@ private Stage escenaFin;
         String historico = datosRanking.toString();
         Text base = new Text(historico);
         base.setFill(HelpTools.COLOR_ITEMS);
+        base.setFont(Font.font("", FontWeight.BOLD, 20));
         contenido.getChildren().add(base);
-        contenido.setLayoutX(300);
+        contenido.setLayoutX(100);
         contenido.setLayoutY(200);
         return contenido;
     }
@@ -208,9 +176,11 @@ private Stage escenaFin;
         HBox contenido = new HBox();
         Text texto = new Text(puntuacionString());
         texto.setFill(HelpTools.COLOR_ITEMS);
+        texto.setFont(Font.font("", FontWeight.BOLD, 20));
         contenido.getChildren().add(texto);
-        contenido.setLayoutX(300);
-        contenido.setLayoutY(300);
+
+        contenido.setLayoutX(350);
+        contenido.setLayoutY(400);
 
         return contenido;
     }
